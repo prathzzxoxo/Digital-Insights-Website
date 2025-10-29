@@ -25,10 +25,12 @@ const Navbar = () => {
       name: "Services",
       href: "/services",
       dropdown: [
-        { name: "Digital Forensics", href: "/services#forensics" },
-        { name: "SOC Services", href: "/services#soc" },
+        { name: "Digital Forensics & Incident Response", href: "/services#forensics" },
+        { name: "Security Operations Center (SOC)", href: "/services#soc" },
         { name: "Penetration Testing", href: "/services#pentest" },
         { name: "Security Assessments", href: "/services#assessments" },
+        { name: "Platform Engineering", href: "/services#platform" },
+        { name: "AI/ML Enhanced Workflows", href: "/services#ai-ml" },
       ],
     },
     {

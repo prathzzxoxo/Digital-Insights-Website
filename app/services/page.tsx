@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Shield, Search, Lock, FileSearch, Users, GraduationCap, Server, Cloud } from "lucide-react";
+import { Shield, Search, Lock, FileSearch, Users, GraduationCap, Cloud, Bot } from "lucide-react";
 import Link from "next/link";
 
 export default function ServicesPage() {
@@ -104,33 +104,33 @@ export default function ServicesPage() {
     },
     {
       id: "platform",
-      icon: Server,
+      icon: Cloud,
       title: "Platform Engineering",
-      description: "Modern infrastructure and platform engineering services including DevSecOps, Kubernetes, and cloud management.",
-      fullDescription: "Build secure, scalable, and reliable infrastructure with our expert platform engineering team.",
-      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80",
+      description: "Modern infrastructure solutions and cloud-native platform engineering services to build secure, scalable, and resilient systems.",
+      fullDescription: "Build secure, scalable, and reliable infrastructure with our expert platform engineering team. We provide DevSecOps, Kubernetes management, and cloud-native solutions.",
+      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80",
       features: [
+        "Cloud infrastructure design and implementation",
         "DevSecOps as a Service",
         "Managed Kubernetes & Service Mesh",
-        "Cloud migration services",
-        "Site Reliability Engineering (SRE)",
+        "Container security",
         "CI/CD pipeline implementation"
       ],
       color: "from-cyan-500 to-blue-500"
     },
     {
-      id: "cloud",
-      icon: Cloud,
-      title: "Cloud Security & Infrastructure",
-      description: "Comprehensive cloud security services including auditing, compliance, and managed cloud infrastructure across AWS, Azure, and GCP.",
-      fullDescription: "Secure your cloud environment with our expert cloud security and infrastructure management services.",
-      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80",
+      id: "ai-ml",
+      icon: Bot,
+      title: "AI/ML Enhanced Workflows",
+      description: "Leverage artificial intelligence and machine learning to enhance security operations, automate threat detection, and improve incident response.",
+      fullDescription: "Transform your security operations with AI and ML technologies. Our solutions use advanced algorithms to detect threats faster, automate responses, and predict potential security incidents.",
+      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80",
       features: [
-        "Cloud auditing and compliance",
-        "Managed cloud infrastructure",
-        "HashiCorp tooling expertise",
-        "Multi-cloud security",
-        "Cloud cost optimization"
+        "Automated threat detection using ML",
+        "Predictive security analytics",
+        "Intelligent incident response automation",
+        "Behavioral analysis and anomaly detection",
+        "AI-powered security orchestration"
       ],
       color: "from-violet-500 to-purple-500"
     },

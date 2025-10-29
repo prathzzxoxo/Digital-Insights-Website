@@ -2,53 +2,97 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { AlertCircle, Shield, Bug, Lock } from "lucide-react";
+import { AlertCircle, Shield, Bug, Lock, Globe } from "lucide-react";
 
-const newsItems = [
-  {
-    icon: AlertCircle,
-    text: "CRITICAL: New zero-day vulnerability discovered in widely-used encryption library",
-    severity: "critical"
-  },
-  {
-    icon: Shield,
-    text: "UAE Cybersecurity Council issues new data protection guidelines for financial sector",
-    severity: "info"
-  },
-  {
-    icon: Bug,
-    text: "ALERT: Ransomware campaign targeting healthcare institutions in the Middle East",
-    severity: "high"
-  },
-  {
-    icon: Lock,
-    text: "Major cloud provider patches critical authentication bypass vulnerability",
-    severity: "high"
-  },
-  {
-    icon: AlertCircle,
-    text: "Phishing campaign impersonating government agencies detected in UAE",
-    severity: "medium"
-  },
-  {
-    icon: Shield,
-    text: "New AI-powered threat detection reduces incident response time by 70%",
-    severity: "info"
-  },
-  {
-    icon: Bug,
-    text: "BREAKING: Supply chain attack affects thousands of organizations globally",
-    severity: "critical"
-  },
-  {
-    icon: Lock,
-    text: "Security researchers discover critical flaw in popular VPN software",
-    severity: "high"
-  },
-];
+interface NewsItem {
+  iconName: string;
+  text: string;
+  severity: string;
+  url?: string;
+}
 
 const NewsTicker = () => {
   const [isPaused, setIsPaused] = useState(false);
+  const [newsItems, setNewsItems] = useState<NewsItem[]>([
+    {
+      iconName: "Globe",
+      text: "Loading latest cybersecurity news...",
+      severity: "info"
+    }
+  ]);
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const response = await fetch(
+          `https://newsapi.org/v2/everything?q=cybersecurity OR hacking OR data breach OR cyber attack&sortBy=publishedAt&language=en&apiKey=373090c9d8fb4892af46b833b8a1b9c8&pageSize=20`
+        );
+        const data = await response.json();
+
+        if (data.articles && data.articles.length > 0) {
+          const formattedNews: NewsItem[] = data.articles.map((article: any) => {
+            const title = article.title.toLowerCase();
+            let severity = "info";
+            let iconName = "Globe";
+
+            if (title.includes("critical") || title.includes("zero-day") || title.includes("ransomware")) {
+              severity = "critical";
+              iconName = "AlertCircle";
+            } else if (title.includes("breach") || title.includes("attack") || title.includes("vulnerability")) {
+              severity = "high";
+              iconName = "Bug";
+            } else if (title.includes("security") || title.includes("patch") || title.includes("update")) {
+              severity = "medium";
+              iconName = "Lock";
+            } else {
+              iconName = "Shield";
+            }
+
+            return {
+              iconName,
+              text: article.title,
+              severity,
+              url: article.url
+            };
+          });
+
+          setNewsItems(formattedNews);
+          // Cache the news
+          localStorage.setItem('securityNews', JSON.stringify({
+            data: formattedNews,
+            timestamp: Date.now()
+          }));
+        }
+      } catch (error) {
+        console.error("Error fetching news:", error);
+        // Try to load from cache
+        const cached = localStorage.getItem('securityNews');
+        if (cached) {
+          const { data } = JSON.parse(cached);
+          setNewsItems(data);
+        }
+      }
+    };
+
+    // Check if we have cached news from today
+    const cached = localStorage.getItem('securityNews');
+    if (cached) {
+      const { data, timestamp } = JSON.parse(cached);
+      const age = Date.now() - timestamp;
+      const ONE_DAY = 24 * 60 * 60 * 1000;
+
+      if (age < ONE_DAY) {
+        setNewsItems(data);
+        return;
+      }
+    }
+
+    fetchNews();
+
+    // Fetch new news every 24 hours
+    const interval = setInterval(fetchNews, 24 * 60 * 60 * 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   const getSeverityColor = (severity: string) => {
     switch (severity) {
@@ -63,8 +107,23 @@ const NewsTicker = () => {
     }
   };
 
+  const getIcon = (iconName: string) => {
+    switch (iconName) {
+      case "AlertCircle":
+        return AlertCircle;
+      case "Shield":
+        return Shield;
+      case "Bug":
+        return Bug;
+      case "Lock":
+        return Lock;
+      default:
+        return Globe;
+    }
+  };
+
   return (
-    <div className="w-full bg-slate-900 border-t border-slate-700 py-3 overflow-hidden">
+    <div className="fixed bottom-0 left-0 right-0 w-full bg-slate-900/95 backdrop-blur-md border-t border-slate-700 py-3 overflow-hidden z-40">
       <div className="max-w-full">
         <div className="flex items-center">
           {/* Breaking News Label */}
@@ -83,27 +142,33 @@ const NewsTicker = () => {
             <motion.div
               className="flex gap-8"
               animate={{
-                x: isPaused ? 0 : [0, -2000],
+                x: isPaused ? 0 : [0, -3000],
               }}
               transition={{
                 x: {
                   repeat: Infinity,
                   repeatType: "loop",
-                  duration: 60,
+                  duration: 80,
                   ease: "linear",
                 },
               }}
             >
               {/* Duplicate news items for seamless loop */}
-              {[...newsItems, ...newsItems, ...newsItems].map((item, index) => (
-                <div
-                  key={index}
-                  className={`flex items-center gap-3 px-4 py-1.5 rounded-lg border ${getSeverityColor(item.severity)} flex-shrink-0`}
-                >
-                  <item.icon className="w-4 h-4" />
-                  <span className="text-sm whitespace-nowrap">{item.text}</span>
-                </div>
-              ))}
+              {[...newsItems, ...newsItems, ...newsItems].map((item, index) => {
+                const IconComponent = getIcon(item.iconName);
+                return (
+                  <a
+                    key={index}
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`flex items-center gap-3 px-4 py-1.5 rounded-lg border ${getSeverityColor(item.severity)} flex-shrink-0 hover:opacity-80 transition-opacity cursor-pointer`}
+                  >
+                    <IconComponent className="w-4 h-4" />
+                    <span className="text-sm whitespace-nowrap">{item.text}</span>
+                  </a>
+                );
+              })}
             </motion.div>
           </div>
         </div>

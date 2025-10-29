@@ -2,30 +2,70 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Play, Shield, Zap, Award, Users } from "lucide-react";
+import { ArrowRight, Play } from "lucide-react";
 import Link from "next/link";
 import VideoModal from "@/components/VideoModal";
 import { Vortex } from "@/components/ui/vortex";
-import { ThreatIntelGlobe } from "@/components/ThreatIntelGlobe";
+import dynamic from "next/dynamic";
+import NewsTicker from "@/components/NewsTicker";
+
+const World = dynamic(() => import("@/components/ui/globe").then((m) => m.World), {
+  ssr: false,
+});
 
 export default function Home() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
 
+  const globeConfig = {
+    pointSize: 4,
+    globeColor: "#0a0a1f",
+    showAtmosphere: true,
+    atmosphereColor: "#C7462F",
+    atmosphereAltitude: 0.1,
+    emissive: "#000000",
+    emissiveIntensity: 0.1,
+    shininess: 0.9,
+    polygonColor: "rgba(199,70,47,0.7)",
+    ambientLight: "#38bdf8",
+    directionalLeftLight: "#ffffff",
+    directionalTopLight: "#ffffff",
+    pointLight: "#ffffff",
+    arcTime: 1000,
+    arcLength: 0.9,
+    rings: 1,
+    maxRings: 3,
+    initialPosition: { lat: 25.2048, lng: 55.2708 },
+    autoRotate: true,
+    autoRotateSpeed: 0.5,
+  };
+
+  const threatData = [
+    { order: 1, startLat: 40.7128, startLng: -74.006, endLat: 25.2048, endLng: 55.2708, arcAlt: 0.3, color: "#ef4444" },
+    { order: 2, startLat: 51.5074, startLng: -0.1278, endLat: 25.2048, endLng: 55.2708, arcAlt: 0.2, color: "#f59e0b" },
+    { order: 3, startLat: 35.6762, startLng: 139.6503, endLat: 25.2048, endLng: 55.2708, arcAlt: 0.25, color: "#ef4444" },
+    { order: 4, startLat: -33.8688, startLng: 151.2093, endLat: 25.2048, endLng: 55.2708, arcAlt: 0.4, color: "#eab308" },
+    { order: 5, startLat: 55.7558, startLng: 37.6173, endLat: 25.2048, endLng: 55.2708, arcAlt: 0.15, color: "#ef4444" },
+    { order: 6, startLat: 39.9042, startLng: 116.4074, endLat: 25.2048, endLng: 55.2708, arcAlt: 0.2, color: "#f59e0b" },
+    { order: 7, startLat: 1.3521, startLng: 103.8198, endLat: 25.2048, endLng: 55.2708, arcAlt: 0.18, color: "#eab308" },
+    { order: 8, startLat: 48.8566, startLng: 2.3522, endLat: 25.2048, endLng: 55.2708, arcAlt: 0.22, color: "#ef4444" },
+  ];
+
   return (
     <>
+      <NewsTicker />
       {/* Hero Section with Vortex Background */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950">
         {/* Vortex Background */}
-        <Vortex
-          backgroundColor="black"
-          rangeY={800}
-          particleCount={500}
-          baseHue={220}
-          className="absolute inset-0 z-0"
-          containerClassName="absolute inset-0 z-0"
-        >
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/50 via-transparent to-slate-900/80 z-10" />
-        </Vortex>
+        <div className="absolute inset-0 z-0">
+          <Vortex
+            backgroundColor="#020617"
+            rangeY={800}
+            particleCount={500}
+            baseHue={200}
+            rangeSpeed={2}
+            className="w-full h-full"
+          />
+        </div>
 
         <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -95,33 +135,14 @@ export default function Home() {
               </motion.div>
             </motion.div>
 
-            {/* Right Content - Stats Cards */}
+            {/* Right Content - Globe */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="grid grid-cols-2 gap-6"
+              className="w-full h-[500px] lg:h-[600px]"
             >
-              {[
-                { icon: Shield, value: "99.9%", label: "Threat Prevention", color: "from-blue-500 to-cyan-500" },
-                { icon: Zap, value: "<5min", label: "Response Time", color: "from-purple-500 to-pink-500" },
-                { icon: Users, value: "500+", label: "Clients Protected", color: "from-orange-500 to-red-500" },
-                { icon: Award, value: "24/7", label: "SOC Monitoring", color: "from-green-500 to-emerald-500" },
-              ].map((stat, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 + index * 0.1 }}
-                  whileHover={{ y: -10, scale: 1.05 }}
-                  className="relative bg-slate-800/50 backdrop-blur-md border border-slate-700/50 rounded-2xl p-6 hover:border-primary-500/50 transition-all group overflow-hidden"
-                >
-                  <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-10 transition-opacity`} />
-                  <stat.icon className={`w-8 h-8 mb-3 text-transparent bg-clip-text bg-gradient-to-r ${stat.color}`} />
-                  <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
-                  <div className="text-sm text-gray-400">{stat.label}</div>
-                </motion.div>
-              ))}
+              <World data={threatData} globeConfig={globeConfig} />
             </motion.div>
           </div>
         </div>
@@ -161,16 +182,16 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {[
               {
-                title: "Digital Forensics",
+                title: "Digital Forensics & Incident Response",
                 description: "Advanced evidence recovery and incident analysis",
                 image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80",
                 href: "/services#forensics"
               },
               {
-                title: "Security Operations Centre",
+                title: "Security Operations Center (SOC)",
                 description: "24/7 threat monitoring and rapid response",
                 image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80",
                 href: "/services#soc"
@@ -180,6 +201,24 @@ export default function Home() {
                 description: "Identify vulnerabilities before attackers do",
                 image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80",
                 href: "/services#pentest"
+              },
+              {
+                title: "Security Assessments",
+                description: "Risk analysis and compliance checks",
+                image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80",
+                href: "/services#assessments"
+              },
+              {
+                title: "Platform Engineering",
+                description: "Cloud-native infrastructure and DevSecOps",
+                image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80",
+                href: "/services#platform"
+              },
+              {
+                title: "AI/ML Enhanced Workflows",
+                description: "Automated threat detection and smart response",
+                image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80",
+                href: "/services#ai-ml"
               },
             ].map((service, index) => (
               <Link key={index} href={service.href}>
@@ -227,13 +266,6 @@ export default function Home() {
               </motion.button>
             </Link>
           </div>
-        </div>
-      </section>
-
-      {/* Threat Intelligence Globe Section */}
-      <section className="py-24 bg-gradient-to-b from-slate-900 via-black to-slate-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ThreatIntelGlobe />
         </div>
       </section>
 

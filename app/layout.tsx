@@ -3,7 +3,6 @@ import { Rubik, Roboto, Roboto_Slab } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import NewsTicker from "@/components/NewsTicker";
 
 const rubik = Rubik({ subsets: ["latin"], variable: '--font-rubik' });
 const roboto = Roboto({ weight: ['400', '500', '700'], subsets: ["latin"], variable: '--font-roboto' });
@@ -31,7 +30,6 @@ export default function RootLayout({
         <main className="min-h-screen">
           {children}
         </main>
-        <NewsTicker />
         <Footer />
       </body>
     </html>
