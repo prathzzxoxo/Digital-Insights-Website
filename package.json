@@ -8,10 +8,18 @@
     "start": "next start",
     "lint": "next lint"
   },
-  "keywords": ["cybersecurity", "AI", "UAE", "penetration testing", "SOC", "digital forensics"],
+  "keywords": [
+    "cybersecurity",
+    "AI",
+    "UAE",
+    "penetration testing",
+    "SOC",
+    "digital forensics"
+  ],
   "author": "Digital Insights UAE",
   "license": "MIT",
   "dependencies": {
+    "@tailwindcss/postcss": "^4.1.16",
     "@types/node": "^24.9.2",
     "@types/react": "^19.2.2",
     "framer-motion": "^12.23.24",
