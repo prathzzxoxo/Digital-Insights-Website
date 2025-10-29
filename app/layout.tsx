@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Rubik, Roboto, Roboto_Slab } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+const rubik = Rubik({ subsets: ["latin"], variable: '--font-rubik' });
+const roboto = Roboto({ weight: ['400', '500', '700'], subsets: ["latin"], variable: '--font-roboto' });
+const robotoSlab = Roboto_Slab({ subsets: ["latin"], variable: '--font-roboto-slab' });
 
 export const metadata: Metadata = {
-  title: "Digital Insights UAE - AI-Powered Analytics & Business Intelligence",
-  description: "Transform your business with cutting-edge AI solutions, data analytics, and digital insights. Leading provider of AI-powered business intelligence in UAE.",
-  keywords: "AI, Machine Learning, Data Analytics, Business Intelligence, Digital Transformation, UAE",
+  title: "Digital Insights UAE - Advanced Cybersecurity Solutions",
+  description: "Keep companies safe from cyber attacks. 24/7 threat detection, incident response, and cutting-edge security services for UAE businesses.",
+  keywords: "Cybersecurity, Digital Forensics, SOC, Penetration Testing, Security Assessments, AI Security, UAE",
 };
 
 export default function RootLayout({
@@ -19,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${rubik.variable} ${roboto.variable} ${robotoSlab.variable} font-rubik bg-white text-gray-900`}>
         <Navbar />
         <main className="min-h-screen">
           {children}

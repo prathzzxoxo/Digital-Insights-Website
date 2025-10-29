@@ -2,28 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 15, 23, 42;
-  --background-start-rgb: 255, 255, 255;
-  --background-end-rgb: 255, 255, 255;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 248, 250, 252;
-    --background-start-rgb: 15, 23, 42;
-    --background-end-rgb: 15, 23, 42;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  font-family: var(--font-rubik), sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #212121;
+  background: #FFFFFF;
 }
 
 @layer utilities {
@@ -38,53 +32,46 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #1e293b;
+  background: #F9F9F9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #0ea5e9;
+  background: #C7462F;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #0284c7;
+  background: #A13825;
 }
 
-/* Smooth scroll behavior */
-html {
-  scroll-behavior: smooth;
+/* Button styles */
+.btn-primary {
+  background-color: #C7462F;
+  color: #FFFFFF;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
 }
 
-/* Gradient text effect */
-.gradient-text {
-  background: linear-gradient(135deg, #0ea5e9 0%, #d946ef 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.btn-primary:hover {
+  background-color: #A13825;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(199, 70, 47, 0.3);
 }
 
-/* Glass morphism effect */
-.glass {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+/* Card styles */
+.service-card {
+  background: #FFFFFF;
+  border: 1px solid #C7462F;
+  border-radius: 5px;
+  padding: 35px 20px;
+  transition: all 0.3s ease;
 }
 
-/* Animated gradient background */
-.animated-gradient {
-  background: linear-gradient(-45deg, #0ea5e9, #0284c7, #d946ef, #c026d3);
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
-}
-
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+.service-card:hover {
+  background: #C7462F0D;
+  box-shadow: 0px 0px 14px -3px rgba(0, 0, 0, 0.1);
 }

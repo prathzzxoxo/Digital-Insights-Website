@@ -39,3 +39,11 @@ next-env.d.ts
 *.swp
 *.swo
 *~
+
+# Windows
+nul
+Thumbs.db
+Desktop.ini
+
+# Claude local settings
+.claude/settings.local.json
