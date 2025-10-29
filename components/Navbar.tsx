@@ -19,28 +19,30 @@ const Navbar = () => {
   }, []);
 
   const navItems = [
-    { name: "Home", href: "#home" },
+    { name: "Home", href: "/" },
     {
       name: "Services",
-      href: "#services",
+      href: "/services",
       dropdown: [
-        { name: "Data Analytics", href: "#data-analytics" },
-        { name: "Business Intelligence", href: "#business-intelligence" },
-        { name: "Digital Transformation", href: "#digital-transformation" },
+        { name: "Digital Forensics", href: "/services#forensics" },
+        { name: "SOC Services", href: "/services#soc" },
+        { name: "Penetration Testing", href: "/services#pentest" },
+        { name: "Security Assessments", href: "/services#assessments" },
       ],
     },
     {
       name: "AI Solutions",
-      href: "#ai-services",
+      href: "/ai-solutions",
       dropdown: [
-        { name: "Machine Learning", href: "#machine-learning" },
-        { name: "Predictive Analytics", href: "#predictive-analytics" },
-        { name: "AI Consulting", href: "#ai-consulting" },
-        { name: "Custom AI Models", href: "#custom-ai" },
+        { name: "Machine Learning", href: "/ai-solutions#ml" },
+        { name: "Threat Detection", href: "/ai-solutions#threat" },
+        { name: "Predictive Analytics", href: "/ai-solutions#analytics" },
+        { name: "AI Consulting", href: "/ai-solutions#consulting" },
       ],
     },
-    { name: "About", href: "#about" },
-    { name: "Contact", href: "#contact" },
+    { name: "About", href: "/about" },
+    { name: "Blog", href: "/blog" },
+    { name: "Contact", href: "/contact" },
   ];
 
   return (
