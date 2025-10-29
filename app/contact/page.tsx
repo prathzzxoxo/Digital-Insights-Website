@@ -5,7 +5,7 @@ import { Mail, Phone, MapPin, Send, Clock, Shield } from "lucide-react";
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-slate-900">
+    <div className="min-h-screen bg-black">
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" />
@@ -40,7 +40,7 @@ export default function ContactPage() {
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-3xl p-10 hover:border-primary-500/50 transition-all"
+              className="bg-gradient-to-br from-slate-800 to-slate-900 border border-gray-700 rounded-3xl p-10 hover:border-primary-500/50 transition-all"
             >
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center">
@@ -105,7 +105,7 @@ export default function ContactPage() {
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-3xl p-10 hover:border-primary-500/50 transition-all"
+              className="bg-gradient-to-br from-slate-800 to-slate-900 border border-gray-700 rounded-3xl p-10 hover:border-primary-500/50 transition-all"
             >
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-16 h-16 rounded-full bg-gradient-to-r from-orange-500 to-red-500 flex items-center justify-center">
@@ -172,7 +172,7 @@ export default function ContactPage() {
             viewport={{ once: true }}
             className="max-w-4xl mx-auto"
           >
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-3xl p-10">
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-gray-700 rounded-3xl p-10">
               <div className="text-center mb-10">
                 <h2 className="text-3xl font-bold text-white mb-4">Send Us a Message</h2>
                 <p className="text-gray-400">Fill out the form below and we'll get back to you within 24 hours</p>
@@ -185,7 +185,7 @@ export default function ContactPage() {
                     <input
                       type="text"
                       required
-                      className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-xl text-white placeholder-gray-500 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all"
+                      className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all"
                       placeholder="John Doe"
                     />
                   </div>
@@ -195,7 +195,7 @@ export default function ContactPage() {
                     <input
                       type="email"
                       required
-                      className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-xl text-white placeholder-gray-500 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all"
+                      className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all"
                       placeholder="john@company.com"
                     />
                   </div>
@@ -205,7 +205,7 @@ export default function ContactPage() {
                   <label className="block text-white font-medium mb-2">Phone Number</label>
                   <input
                     type="tel"
-                    className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-xl text-white placeholder-gray-500 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all"
+                    className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all"
                     placeholder="+971 XX XXX XXXX"
                   />
                 </div>
@@ -215,7 +215,7 @@ export default function ContactPage() {
                   <input
                     type="text"
                     required
-                    className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-xl text-white placeholder-gray-500 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all"
+                    className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all"
                     placeholder="How can we help?"
                   />
                 </div>
@@ -225,7 +225,7 @@ export default function ContactPage() {
                   <textarea
                     rows={6}
                     required
-                    className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-xl text-white placeholder-gray-500 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all resize-none"
+                    className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all resize-none"
                     placeholder="Tell us about your security needs..."
                   />
                 </div>

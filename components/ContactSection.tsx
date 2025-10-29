@@ -67,14 +67,14 @@ const ContactSection = () => {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-slate-900 border border-slate-700 rounded-2xl p-8"
+            className="bg-black border border-gray-700 rounded-2xl p-8"
           >
             <form className="space-y-6">
               <div>
                 <label className="block text-white font-medium mb-2">Name</label>
                 <input
                   type="text"
-                  className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:border-primary-500 focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:border-primary-500 focus:outline-none transition-colors"
                   placeholder="Your name"
                 />
               </div>
@@ -83,7 +83,7 @@ const ContactSection = () => {
                 <label className="block text-white font-medium mb-2">Email</label>
                 <input
                   type="email"
-                  className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:border-primary-500 focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:border-primary-500 focus:outline-none transition-colors"
                   placeholder="your@email.com"
                 />
               </div>
@@ -92,7 +92,7 @@ const ContactSection = () => {
                 <label className="block text-white font-medium mb-2">Message</label>
                 <textarea
                   rows={5}
-                  className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white focus:border-primary-500 focus:outline-none transition-colors resize-none"
+                  className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:border-primary-500 focus:outline-none transition-colors resize-none"
                   placeholder="Tell us about your security needs..."
                 />
               </div>

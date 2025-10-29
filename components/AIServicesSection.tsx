@@ -118,7 +118,7 @@ const AIServicesSection = () => {
     <section
       id="ai-services"
       ref={ref}
-      className="py-24 bg-slate-900 relative overflow-hidden"
+      className="py-24 bg-black relative overflow-hidden"
     >
       {/* Animated Background */}
       <div className="absolute inset-0">
@@ -169,7 +169,7 @@ const AIServicesSection = () => {
               className={`px-6 py-3 rounded-full font-semibold transition-all ${
                 activeTab === index
                   ? "bg-gradient-to-r from-primary-500 to-accent-500 text-white shadow-lg"
-                  : "bg-slate-800 text-gray-400 hover:text-white border border-slate-700"
+                  : "bg-gray-900 text-gray-400 hover:text-white border border-gray-700"
               }`}
             >
               {tab}
@@ -189,7 +189,7 @@ const AIServicesSection = () => {
               className="group relative"
             >
               {/* Card */}
-              <div className="h-full bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-3xl p-8 hover:border-primary-500/50 transition-all duration-500 relative overflow-hidden">
+              <div className="h-full bg-gradient-to-br from-slate-800 to-slate-900 border border-gray-700 rounded-3xl p-8 hover:border-primary-500/50 transition-all duration-500 relative overflow-hidden">
                 {/* Animated Gradient Background */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
 

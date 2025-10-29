@@ -91,9 +91,9 @@ const BlogPage = () => {
               className="group"
             >
               <Link href={`/blog/${post.id}`}>
-                <div className="bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden hover:border-primary-500/50 transition-all duration-300">
+                <div className="bg-gray-900 border border-gray-700 rounded-2xl overflow-hidden hover:border-primary-500/50 transition-all duration-300">
                   {/* Image */}
-                  <div className="relative h-48 bg-slate-700 overflow-hidden">
+                  <div className="relative h-48 bg-gray-800 overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10" />
                     <span className="absolute top-4 left-4 z-20 px-3 py-1 bg-primary-500 text-white text-xs font-semibold rounded-full">
                       {post.category}

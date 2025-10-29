@@ -137,7 +137,7 @@ export default function ServicesPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-900">
+    <div className="min-h-screen bg-black">
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" />
@@ -262,7 +262,7 @@ export default function ServicesPage() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-10 py-5 bg-white text-primary-600 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all"
+                className="px-10 py-5 bg-gradient-to-r from-red-600 to-red-800 text-white rounded-full font-bold text-lg shadow-xl hover:shadow-red-500/50 transition-all"
               >
                 Contact Us Today
               </motion.button>

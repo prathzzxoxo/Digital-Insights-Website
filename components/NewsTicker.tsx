@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { AlertCircle, Shield, Bug, Lock, Globe } from "lucide-react";
 
@@ -12,87 +12,32 @@ interface NewsItem {
 }
 
 const NewsTicker = () => {
-  const [isPaused, setIsPaused] = useState(false);
-  const [newsItems, setNewsItems] = useState<NewsItem[]>([
+  const [newsItems] = useState<NewsItem[]>([
+    {
+      iconName: "AlertCircle",
+      text: "10 npm Packages Caught Stealing Developer Credentials on Windows, macOS, and Linux",
+      severity: "critical",
+      url: "https://thehackernews.com/"
+    },
+    {
+      iconName: "Shield",
+      text: "Google Unveils Guide for Defenders to Monitor Privileged User Accounts",
+      severity: "info",
+      url: "https://cybersecuritynews.com/"
+    },
+    {
+      iconName: "Bug",
+      text: "Top 25 cyber threats in the world",
+      severity: "high",
+      url: "https://www.reuters.com/technology/cybersecurity/"
+    },
     {
       iconName: "Globe",
-      text: "Loading latest cybersecurity news...",
-      severity: "info"
-    }
+      text: "Bleeping Computer | Cybersecurity & Technology News",
+      severity: "medium",
+      url: "https://www.bleepingcomputer.com/"
+    },
   ]);
-
-  useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        const response = await fetch(
-          `https://newsapi.org/v2/everything?q=cybersecurity OR hacking OR data breach OR cyber attack&sortBy=publishedAt&language=en&apiKey=373090c9d8fb4892af46b833b8a1b9c8&pageSize=20`
-        );
-        const data = await response.json();
-
-        if (data.articles && data.articles.length > 0) {
-          const formattedNews: NewsItem[] = data.articles.map((article: any) => {
-            const title = article.title.toLowerCase();
-            let severity = "info";
-            let iconName = "Globe";
-
-            if (title.includes("critical") || title.includes("zero-day") || title.includes("ransomware")) {
-              severity = "critical";
-              iconName = "AlertCircle";
-            } else if (title.includes("breach") || title.includes("attack") || title.includes("vulnerability")) {
-              severity = "high";
-              iconName = "Bug";
-            } else if (title.includes("security") || title.includes("patch") || title.includes("update")) {
-              severity = "medium";
-              iconName = "Lock";
-            } else {
-              iconName = "Shield";
-            }
-
-            return {
-              iconName,
-              text: article.title,
-              severity,
-              url: article.url
-            };
-          });
-
-          setNewsItems(formattedNews);
-          // Cache the news
-          localStorage.setItem('securityNews', JSON.stringify({
-            data: formattedNews,
-            timestamp: Date.now()
-          }));
-        }
-      } catch (error) {
-        console.error("Error fetching news:", error);
-        // Try to load from cache
-        const cached = localStorage.getItem('securityNews');
-        if (cached) {
-          const { data } = JSON.parse(cached);
-          setNewsItems(data);
-        }
-      }
-    };
-
-    // Check if we have cached news from today
-    const cached = localStorage.getItem('securityNews');
-    if (cached) {
-      const { data, timestamp } = JSON.parse(cached);
-      const age = Date.now() - timestamp;
-      const ONE_DAY = 24 * 60 * 60 * 1000;
-
-      if (age < ONE_DAY) {
-        setNewsItems(data);
-        return;
-      }
-    }
-
-    fetchNews();
-
-    // Fetch new news every 24 hours
-    const interval = setInterval(fetchNews, 24 * 60 * 60 * 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   const getSeverityColor = (severity: string) => {
     switch (severity) {
@@ -123,7 +68,7 @@ const NewsTicker = () => {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 w-full bg-slate-900/95 backdrop-blur-md border-t border-slate-700 py-3 overflow-hidden z-40">
+    <div className="fixed bottom-0 left-0 right-0 w-full bg-black/95 backdrop-blur-md border-t border-gray-700 py-3 overflow-hidden z-40">
       <div className="max-w-full">
         <div className="flex items-center">
           {/* Breaking News Label */}
@@ -134,15 +79,11 @@ const NewsTicker = () => {
           </div>
 
           {/* Scrolling News Container */}
-          <div
-            className="flex-1 overflow-hidden"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-          >
+          <div className="flex-1 overflow-hidden">
             <motion.div
               className="flex gap-8"
               animate={{
-                x: isPaused ? 0 : [0, -3000],
+                x: [0, -3000],
               }}
               transition={{
                 x: {

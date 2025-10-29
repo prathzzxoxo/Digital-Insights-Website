@@ -43,7 +43,7 @@ export default function VideoModal({ isOpen, onClose, videoUrl }: VideoModalProp
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
             className="fixed inset-0 z-50 flex items-center justify-center p-4"
           >
-            <div className="relative w-full max-w-5xl bg-slate-900 rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative w-full max-w-5xl bg-black rounded-2xl overflow-hidden shadow-2xl">
               {/* Close Button */}
               <button
                 onClick={onClose}

@@ -17,16 +17,16 @@ export default function Home() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   const globeConfig = {
-    pointSize: 4,
-    globeColor: "#0a0a1f",
+    pointSize: 6,
+    globeColor: "#1a1a1a",
     showAtmosphere: true,
-    atmosphereColor: "#C7462F",
-    atmosphereAltitude: 0.1,
-    emissive: "#000000",
-    emissiveIntensity: 0.1,
-    shininess: 0.9,
-    polygonColor: "rgba(199,70,47,0.7)",
-    ambientLight: "#38bdf8",
+    atmosphereColor: "#ffffff",
+    atmosphereAltitude: 0.15,
+    emissive: "#2a2a2a",
+    emissiveIntensity: 0.3,
+    shininess: 1,
+    polygonColor: "rgba(255,255,255,0.3)",
+    ambientLight: "#ffffff",
     directionalLeftLight: "#ffffff",
     directionalTopLight: "#ffffff",
     pointLight: "#ffffff",
@@ -48,17 +48,27 @@ export default function Home() {
     { order: 6, startLat: 39.9042, startLng: 116.4074, endLat: 25.2048, endLng: 55.2708, arcAlt: 0.2, color: "#f59e0b" },
     { order: 7, startLat: 1.3521, startLng: 103.8198, endLat: 25.2048, endLng: 55.2708, arcAlt: 0.18, color: "#eab308" },
     { order: 8, startLat: 48.8566, startLng: 2.3522, endLat: 25.2048, endLng: 55.2708, arcAlt: 0.22, color: "#ef4444" },
+    { order: 9, startLat: 37.7749, startLng: -122.4194, endLat: 25.2048, endLng: 55.2708, arcAlt: 0.35, color: "#f59e0b" },
+    { order: 10, startLat: -23.5505, startLng: -46.6333, endLat: 25.2048, endLng: 55.2708, arcAlt: 0.38, color: "#ef4444" },
+    { order: 11, startLat: 19.4326, startLng: -99.1332, endLat: 25.2048, endLng: 55.2708, arcAlt: 0.32, color: "#eab308" },
+    { order: 12, startLat: 28.6139, startLng: 77.2090, endLat: 25.2048, endLng: 55.2708, arcAlt: 0.12, color: "#f59e0b" },
+    { order: 13, startLat: 52.5200, startLng: 13.4050, endLat: 25.2048, endLng: 55.2708, arcAlt: 0.19, color: "#ef4444" },
+    { order: 14, startLat: -1.2921, startLng: 36.8219, endLat: 25.2048, endLng: 55.2708, arcAlt: 0.28, color: "#eab308" },
+    { order: 15, startLat: 41.9028, startLng: 12.4964, endLat: 25.2048, endLng: 55.2708, arcAlt: 0.21, color: "#f59e0b" },
+    { order: 16, startLat: 34.0522, startLng: -118.2437, endLat: 25.2048, endLng: 55.2708, arcAlt: 0.36, color: "#ef4444" },
+    { order: 17, startLat: 22.3193, startLng: 114.1694, endLat: 25.2048, endLng: 55.2708, arcAlt: 0.23, color: "#eab308" },
+    { order: 18, startLat: 13.7563, startLng: 100.5018, endLat: 25.2048, endLng: 55.2708, arcAlt: 0.24, color: "#f59e0b" },
   ];
 
   return (
     <>
       <NewsTicker />
       {/* Hero Section with Vortex Background */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
         {/* Vortex Background */}
         <div className="absolute inset-0 z-0">
           <Vortex
-            backgroundColor="#020617"
+            backgroundColor="#000000"
             rangeY={800}
             particleCount={500}
             baseHue={200}
@@ -79,9 +89,9 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="inline-block px-4 py-2 bg-primary-500/10 border border-primary-500/30 rounded-full mb-6"
+                className="inline-block px-4 py-2 bg-white/10 border border-white/30 rounded-full mb-6"
               >
-                <span className="text-primary-400 font-semibold text-sm">🛡️ AI-Powered Cybersecurity</span>
+                <span className="text-white font-semibold text-sm">🛡️ AI-Powered Cybersecurity</span>
               </motion.div>
 
               <motion.h1
@@ -91,9 +101,7 @@ export default function Home() {
                 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
               >
                 Keep Companies <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-accent-400">
-                  Safe From Cyber Attacks
-                </span>
+                Safe From Cyber Attacks
               </motion.h1>
 
               <motion.p
@@ -112,17 +120,6 @@ export default function Home() {
                 transition={{ delay: 0.5 }}
                 className="flex flex-col sm:flex-row gap-4"
               >
-                <Link href="/contact">
-                  <motion.button
-                    whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(14, 165, 233, 0.4)" }}
-                    whileTap={{ scale: 0.95 }}
-                    className="group px-8 py-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-full font-semibold text-lg flex items-center justify-center gap-2 shadow-xl"
-                  >
-                    <span>Get Protected Now</span>
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </motion.button>
-                </Link>
-
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -165,7 +162,7 @@ export default function Home() {
       </section>
 
       {/* Services Preview */}
-      <section className="py-24 bg-slate-900">
+      <section className="py-24 bg-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

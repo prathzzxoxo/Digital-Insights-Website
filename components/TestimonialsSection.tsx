@@ -31,7 +31,7 @@ const TestimonialsSection = () => {
   ];
 
   return (
-    <section ref={ref} className="py-24 bg-slate-800 relative overflow-hidden">
+    <section ref={ref} className="py-24 bg-gray-900 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary-500/5 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -55,7 +55,7 @@ const TestimonialsSection = () => {
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: index * 0.2, duration: 0.6 }}
-              className="bg-slate-900 border border-slate-700 rounded-2xl p-8 hover:border-primary-500/50 transition-all"
+              className="bg-black border border-gray-700 rounded-2xl p-8 hover:border-primary-500/50 transition-all"
             >
               <Quote className="w-12 h-12 text-primary-400 mb-4" />
               <p className="text-gray-300 mb-6 italic">{testimonial.content}</p>

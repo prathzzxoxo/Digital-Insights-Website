@@ -135,7 +135,7 @@ const ServicesSection = () => {
               className="group relative"
             >
               {/* Card */}
-              <div className="h-full bg-slate-800 border border-slate-700 rounded-2xl p-8 hover:border-primary-500/50 transition-all duration-300 relative overflow-hidden">
+              <div className="h-full bg-gray-900 border border-gray-700 rounded-2xl p-8 hover:border-primary-500/50 transition-all duration-300 relative overflow-hidden">
                 {/* Gradient Overlay on Hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary-500/0 to-accent-500/0 group-hover:from-primary-500/5 group-hover:to-accent-500/5 transition-all duration-300 rounded-2xl" />
 

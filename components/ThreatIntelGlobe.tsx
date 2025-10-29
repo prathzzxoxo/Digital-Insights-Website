@@ -9,26 +9,26 @@ const World = dynamic(() => import("@/components/ui/globe").then((m) => m.World)
 
 export function ThreatIntelGlobe() {
   const globeConfig = {
-    pointSize: 4,
-    globeColor: "#0a0a1f",
+    pointSize: 6,
+    globeColor: "#000000",
     showAtmosphere: true,
-    atmosphereColor: "#C7462F",
-    atmosphereAltitude: 0.1,
-    emissive: "#000000",
-    emissiveIntensity: 0.1,
-    shininess: 0.9,
-    polygonColor: "rgba(199,70,47,0.7)",
-    ambientLight: "#38bdf8",
-    directionalLeftLight: "#ffffff",
-    directionalTopLight: "#ffffff",
-    pointLight: "#ffffff",
-    arcTime: 1000,
-    arcLength: 0.9,
-    rings: 1,
-    maxRings: 3,
+    atmosphereColor: "#ff0000",
+    atmosphereAltitude: 0.15,
+    emissive: "#0a0a0a",
+    emissiveIntensity: 0.2,
+    shininess: 1,
+    polygonColor: "rgba(255,0,0,0.4)",
+    ambientLight: "#ff0000",
+    directionalLeftLight: "#ff4444",
+    directionalTopLight: "#ff6666",
+    pointLight: "#C7462F",
+    arcTime: 2000,
+    arcLength: 0.95,
+    rings: 2,
+    maxRings: 4,
     initialPosition: { lat: 25.2048, lng: 55.2708 }, // Dubai coordinates
     autoRotate: true,
-    autoRotateSpeed: 0.5,
+    autoRotateSpeed: 0.8,
   };
 
   const threatData = [
@@ -126,47 +126,62 @@ export function ThreatIntelGlobe() {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center relative">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
-        className="text-center mb-8"
+        className="text-center mb-8 relative z-10"
       >
-        <h3 className="text-3xl font-bold text-white mb-3">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-accent-400">
+        <h3 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-700">
             Global Threat Intelligence
           </span>
         </h3>
-        <p className="text-gray-400 text-lg">
+        <p className="text-gray-300 text-xl">
           Real-time monitoring of cyber threats worldwide
         </p>
       </motion.div>
 
-      <div className="w-full h-[600px] md:h-[700px] relative">
-        <World data={threatData} globeConfig={globeConfig} />
+      <div className="w-full h-[600px] md:h-[750px] relative">
+        {/* Glow effect behind globe */}
+        <div className="absolute inset-0 bg-gradient-radial from-red-950/40 via-transparent to-transparent blur-3xl" />
 
-        {/* Threat Stats Overlay */}
-        <div className="absolute top-8 right-8 bg-slate-800/80 backdrop-blur-md border border-slate-700 rounded-xl p-6 space-y-4">
-          <div className="text-sm text-gray-400 mb-2">Threat Activity (24h)</div>
-          <div className="space-y-3">
-            <div className="flex items-center gap-3">
-              <div className="w-3 h-3 rounded-full bg-red-500 animate-pulse"></div>
-              <span className="text-white font-semibold">1,247</span>
-              <span className="text-gray-400 text-sm">Critical</span>
+        {/* Globe container with enhanced styling */}
+        <div className="relative w-full h-full rounded-3xl overflow-hidden border border-red-900/30 bg-black/50 backdrop-blur-sm shadow-2xl shadow-red-900/20">
+          <World data={threatData} globeConfig={globeConfig} />
+        </div>
+
+        {/* Threat Stats Overlay - Enhanced */}
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+          className="absolute top-8 right-8 bg-black/90 backdrop-blur-xl border border-red-900/50 rounded-2xl p-6 space-y-4 shadow-xl shadow-red-900/30"
+        >
+          <div className="text-sm text-red-400 font-bold mb-3 uppercase tracking-wider">Threat Activity (24h)</div>
+          <div className="space-y-4">
+            <div className="flex items-center gap-4">
+              <div className="w-4 h-4 rounded-full bg-red-600 animate-pulse shadow-lg shadow-red-500/50"></div>
+              <span className="text-white font-bold text-lg">1,247</span>
+              <span className="text-gray-300 text-sm font-medium">Critical</span>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="w-3 h-3 rounded-full bg-orange-500 animate-pulse"></div>
-              <span className="text-white font-semibold">3,891</span>
-              <span className="text-gray-400 text-sm">High</span>
+            <div className="flex items-center gap-4">
+              <div className="w-4 h-4 rounded-full bg-orange-500 animate-pulse shadow-lg shadow-orange-500/50"></div>
+              <span className="text-white font-bold text-lg">3,891</span>
+              <span className="text-gray-300 text-sm font-medium">High</span>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="w-3 h-3 rounded-full bg-yellow-500 animate-pulse"></div>
-              <span className="text-white font-semibold">8,523</span>
-              <span className="text-gray-400 text-sm">Medium</span>
+            <div className="flex items-center gap-4">
+              <div className="w-4 h-4 rounded-full bg-yellow-500 animate-pulse shadow-lg shadow-yellow-500/50"></div>
+              <span className="text-white font-bold text-lg">8,523</span>
+              <span className="text-gray-300 text-sm font-medium">Medium</span>
             </div>
           </div>
-        </div>
+          <div className="pt-3 border-t border-red-900/50">
+            <div className="text-xs text-gray-400 uppercase tracking-wide">Last Updated</div>
+            <div className="text-sm text-red-400 font-semibold">Live</div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );

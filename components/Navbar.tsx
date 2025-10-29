@@ -21,6 +21,7 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Home", href: "/" },
+    { name: "Why Digital Insights", href: "/about" },
     {
       name: "Services",
       href: "/services",
@@ -43,7 +44,6 @@ const Navbar = () => {
         { name: "AI Consulting", href: "/ai-solutions#consulting" },
       ],
     },
-    { name: "About", href: "/about" },
     { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
   ];
@@ -55,7 +55,7 @@ const Navbar = () => {
       transition={{ duration: 0.5 }}
       className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-slate-900/95 backdrop-blur-md shadow-lg"
+          ? "bg-black/95 backdrop-blur-md shadow-lg"
           : "bg-transparent"
       }`}
     >
@@ -69,18 +69,11 @@ const Navbar = () => {
             <Link href="/" className="flex items-center space-x-3">
               <div className="relative w-12 h-12">
                 <Image
-                  src="/images/logo.png"
+                  src="/images/minilogo.png"
                   alt="Digital Insights UAE"
                   fill
                   className="object-contain"
-                  onError={(e) => {
-                    // Fallback to text logo if image fails to load
-                    e.currentTarget.style.display = 'none';
-                  }}
                 />
-                <div className="w-12 h-12 bg-gradient-to-r from-primary-500 to-accent-500 rounded-lg flex items-center justify-center absolute inset-0 -z-10">
-                  <span className="text-white font-bold text-xl">DI</span>
-                </div>
               </div>
               <span className="text-white font-bold text-xl hidden sm:block">
                 Digital Insights
@@ -122,13 +115,13 @@ const Navbar = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute left-0 mt-2 w-56 rounded-lg bg-slate-800 shadow-xl border border-slate-700 overflow-hidden"
+                        className="absolute left-0 mt-2 w-56 rounded-lg bg-black shadow-xl border border-gray-700 overflow-hidden"
                       >
                         {item.dropdown.map((subItem) => (
                           <Link
                             key={subItem.name}
                             href={subItem.href}
-                            className="block px-4 py-3 text-sm text-gray-300 hover:bg-slate-700 hover:text-white transition-colors"
+                            className="block px-4 py-3 text-sm text-gray-300 hover:bg-gray-900 hover:text-white transition-colors"
                           >
                             {subItem.name}
                           </Link>
@@ -138,13 +131,6 @@ const Navbar = () => {
                   </AnimatePresence>
                 </div>
               ))}
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-primary-500 to-accent-500 text-white px-6 py-2 rounded-full font-medium hover:shadow-lg hover:shadow-primary-500/50 transition-all"
-              >
-                Get Started
-              </motion.button>
             </div>
           </div>
 
@@ -169,7 +155,7 @@ const Navbar = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-slate-900/95 backdrop-blur-md"
+            className="md:hidden bg-black/95 backdrop-blur-md"
           >
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {navItems.map((item) => (
@@ -197,12 +183,6 @@ const Navbar = () => {
                   )}
                 </div>
               ))}
-              <motion.button
-                whileTap={{ scale: 0.95 }}
-                className="w-full mt-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white px-6 py-2 rounded-full font-medium"
-              >
-                Get Started
-              </motion.button>
             </div>
           </motion.div>
         )}

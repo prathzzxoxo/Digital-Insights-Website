@@ -1,81 +1,52 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+# Implementation Guide for Digital Insights Website Updates
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+## Quick Fixes Needed
 
-html {
-  scroll-behavior: smooth;
-}
+### 1. Fix Logo Path in Navbar
+File: `components/Navbar.tsx`
+Line 72: Change `/images/logo.png` to `/images/mainlogo.png`
+Line 23: Move `{ name: "About", href: "/about" },` to line 24 (after Home)
 
-body {
-  font-family: var(--font-rubik), sans-serif;
-  font-size: 15px;
-  line-height: 1.6;
-  color: #FFFFFF;
-  background: #000000;
-}
+### 2. Update News Ticker with Hardcoded News
+File: `components/NewsTicker.tsx`
+Replace the `newsItems` state initialization and remove NewsAPI fetch with:
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
+```typescript
+const [newsItems] = useState<NewsItem[]>([
+  {
+    iconName: "AlertCircle",
+    text: "10 npm Packages Caught Stealing Developer Credentials on Windows, macOS, and Linux",
+    severity: "critical",
+    url: "https://thehackernews.com/"
+  },
+  {
+    iconName: "Shield",
+    text: "Google Unveils Guide for Defenders to Monitor Privileged User Accounts",
+    severity: "info",
+    url: "https://cybersecuritynews.com/"
+  },
+  {
+    iconName: "Bug",
+    text: "Top 25 cyber threats in the world",
+    severity: "high",
+    url: "https://www.reuters.com/technology/cybersecurity/"
+  },
+  {
+    iconName: "Globe",
+    text: "Bleeping Computer | Cybersecurity & Technology News",
+    severity: "medium",
+    url: "https://www.bleepingcomputer.com/"
+  },
+]);
+```
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
+Remove the entire `useEffect` block that fetches from NewsAPI.
 
-::-webkit-scrollbar-track {
-  background: #F9F9F9;
-}
+### 3. Add Loading Spinner CSS
+File: `app/globals.css`
+Add at the end:
 
-::-webkit-scrollbar-thumb {
-  background: #C7462F;
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #A13825;
-}
-
-/* Button styles */
-.btn-primary {
-  background-color: #C7462F;
-  color: #FFFFFF;
-  padding: 12px 30px;
-  border-radius: 25px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  border: none;
-  cursor: pointer;
-}
-
-.btn-primary:hover {
-  background-color: #A13825;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(199, 70, 47, 0.3);
-}
-
-/* Card styles */
-.service-card {
-  background: #000000;
-  border: 1px solid #C7462F;
-  border-radius: 5px;
-  padding: 35px 20px;
-  transition: all 0.3s ease;
-}
-
-.service-card:hover {
-  background: #C7462F0D;
-  box-shadow: 0px 0px 14px -3px rgba(0, 0, 0, 0.1);
-}
-
+```css
 /* Loading Spinner */
 .loader {
   width: fit-content;
@@ -117,3 +88,15 @@ body {
 @keyframes l8-1{
   100% {left:115%}
 }
+```
+
+### 4. Complete About Page Rewrite Needed
+Create new file: `app/about/page.tsx` with the full content structure.
+
+## Commands to Run
+
+1. Stop the dev server (Ctrl+C)
+2. Make the above changes
+3. Run `npm run dev` again
+
+All changes are documented above for manual implementation.

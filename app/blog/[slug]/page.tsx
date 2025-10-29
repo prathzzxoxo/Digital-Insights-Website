@@ -70,7 +70,7 @@ const BlogPost = () => {
           transition={{ delay: 0.2, duration: 0.6 }}
           className="prose prose-invert prose-lg max-w-none"
         >
-          <div className="bg-slate-800 border border-slate-700 rounded-2xl p-8 text-gray-300 whitespace-pre-line">
+          <div className="bg-gray-900 border border-gray-700 rounded-2xl p-8 text-gray-300 whitespace-pre-line">
             {post.content}
           </div>
         </motion.div>

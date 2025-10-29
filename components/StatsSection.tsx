@@ -17,7 +17,7 @@ const StatsSection = () => {
   ];
 
   return (
-    <section ref={ref} className="py-20 bg-slate-900 relative overflow-hidden">
+    <section ref={ref} className="py-20 bg-black relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary-500/5 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -31,7 +31,7 @@ const StatsSection = () => {
               whileHover={{ scale: 1.05, y: -5 }}
               className="relative group"
             >
-              <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-2xl p-8 text-center hover:border-primary-500/50 transition-all duration-300">
+              <div className="bg-gradient-to-br from-slate-800 to-slate-900 border border-gray-700 rounded-2xl p-8 text-center hover:border-primary-500/50 transition-all duration-300">
                 <motion.div
                   whileHover={{ rotate: 360 }}
                   transition={{ duration: 0.6 }}

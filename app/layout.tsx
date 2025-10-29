@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${rubik.variable} ${roboto.variable} ${robotoSlab.variable} font-rubik bg-white text-gray-900`}>
+      <body className={`${rubik.variable} ${roboto.variable} ${robotoSlab.variable} font-rubik bg-black text-white`}>
         <Navbar />
         <main className="min-h-screen">
           {children}
