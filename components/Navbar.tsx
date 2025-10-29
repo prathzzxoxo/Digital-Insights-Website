@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -63,9 +64,21 @@ const Navbar = () => {
             whileHover={{ scale: 1.05 }}
             className="flex-shrink-0"
           >
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-to-r from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">DI</span>
+            <Link href="/" className="flex items-center space-x-3">
+              <div className="relative w-12 h-12">
+                <Image
+                  src="/images/logo.png"
+                  alt="Digital Insights UAE"
+                  fill
+                  className="object-contain"
+                  onError={(e) => {
+                    // Fallback to text logo if image fails to load
+                    e.currentTarget.style.display = 'none';
+                  }}
+                />
+                <div className="w-12 h-12 bg-gradient-to-r from-primary-500 to-accent-500 rounded-lg flex items-center justify-center absolute inset-0 -z-10">
+                  <span className="text-white font-bold text-xl">DI</span>
+                </div>
               </div>
               <span className="text-white font-bold text-xl hidden sm:block">
                 Digital Insights

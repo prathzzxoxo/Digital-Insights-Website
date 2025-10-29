@@ -5,29 +5,27 @@ import { motion } from "framer-motion";
 import { ArrowRight, Play, Shield, Zap, Award, Users } from "lucide-react";
 import Link from "next/link";
 import VideoModal from "@/components/VideoModal";
+import { Vortex } from "@/components/ui/vortex";
+import { ThreatIntelGlobe } from "@/components/ThreatIntelGlobe";
 
 export default function Home() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   return (
     <>
-      {/* Hero Section with Background Image */}
+      {/* Hero Section with Vortex Background */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image with Overlay */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-900/90 to-slate-900/95 z-10" />
-          <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: "url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1920&q=80')",
-            }}
-          />
-          {/* Animated Grid Overlay */}
-          <div className="absolute inset-0 z-10 opacity-20" style={{
-            backgroundImage: 'linear-gradient(rgba(14, 165, 233, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(14, 165, 233, 0.1) 1px, transparent 1px)',
-            backgroundSize: '50px 50px'
-          }} />
-        </div>
+        {/* Vortex Background */}
+        <Vortex
+          backgroundColor="black"
+          rangeY={800}
+          particleCount={500}
+          baseHue={220}
+          className="absolute inset-0 z-0"
+          containerClassName="absolute inset-0 z-0"
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/50 via-transparent to-slate-900/80 z-10" />
+        </Vortex>
 
         <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -229,6 +227,13 @@ export default function Home() {
               </motion.button>
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Threat Intelligence Globe Section */}
+      <section className="py-24 bg-gradient-to-b from-slate-900 via-black to-slate-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ThreatIntelGlobe />
         </div>
       </section>
 

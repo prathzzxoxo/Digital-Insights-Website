@@ -10,6 +10,8 @@ import {
   FileSearch,
   Users,
   GraduationCap,
+  Cloud,
+  Bot,
 } from "lucide-react";
 
 const ServicesSection = () => {
@@ -24,14 +26,16 @@ const ServicesSection = () => {
         "We use the most advanced cloning techniques to recover all forms of digital evidence; we accurately recreate past events to support investigations.",
       gradient: "from-blue-500 to-cyan-500",
       features: ["24/7 Incident Response", "Evidence Recovery", "Investigation Support"],
+      image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=400&q=80"
     },
     {
       icon: Shield,
-      title: "Security Operations Centre (SOC)",
+      title: "Security Operations Center (SOC)",
       description:
         "WatchTower365 SOC that intends to prevent and detect cybersecurity threats and respond to any incidents 24/7.",
       gradient: "from-purple-500 to-pink-500",
       features: ["24/7 Monitoring", "Threat Detection", "Rapid Response"],
+      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&q=80"
     },
     {
       icon: Search,
@@ -40,6 +44,7 @@ const ServicesSection = () => {
         "Combining Penetration Testing with Vulnerability Assessment to identify and validate threats or weaknesses that could compromise IT security.",
       gradient: "from-orange-500 to-red-500",
       features: ["Vulnerability Scanning", "Threat Validation", "Security Reports"],
+      image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&q=80"
     },
     {
       icon: Lock,
@@ -48,6 +53,7 @@ const ServicesSection = () => {
         "Identify and quantify security vulnerabilities in your environment with in-depth assessments and actionable recommendations.",
       gradient: "from-green-500 to-emerald-500",
       features: ["Risk Analysis", "Compliance Checks", "Action Plans"],
+      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&q=80"
     },
     {
       icon: Users,
@@ -56,14 +62,34 @@ const ServicesSection = () => {
         "Expert cybersecurity consulting services including SOC readiness assessments, assurance advisory, and strategic security planning.",
       gradient: "from-indigo-500 to-purple-500",
       features: ["SOC Readiness", "Advisory Services", "Strategic Planning"],
+      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&q=80"
     },
     {
       icon: GraduationCap,
-      title: "Cybersecurity Training",
+      title: "Cyber Security Training",
       description:
         "Comprehensive training programs including AWS, Cisco, phishing awareness, and cybersecurity best practices for your team.",
       gradient: "from-pink-500 to-rose-500",
       features: ["AWS Training", "Cisco Certification", "Phishing Awareness"],
+      image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=400&q=80"
+    },
+    {
+      icon: Cloud,
+      title: "Platform Engineering",
+      description:
+        "Modern infrastructure solutions and cloud-native platform engineering services to build secure, scalable, and resilient systems.",
+      gradient: "from-cyan-500 to-blue-500",
+      features: ["Cloud Infrastructure", "DevSecOps", "Container Security"],
+      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&q=80"
+    },
+    {
+      icon: Bot,
+      title: "AI/ML Enhanced Workflows",
+      description:
+        "Leverage artificial intelligence and machine learning to enhance security operations, automate threat detection, and improve incident response.",
+      gradient: "from-violet-500 to-purple-500",
+      features: ["Automated Threat Detection", "Predictive Analysis", "Smart Response"],
+      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&q=80"
     },
   ];
 

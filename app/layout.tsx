@@ -3,6 +3,7 @@ import { Rubik, Roboto, Roboto_Slab } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import NewsTicker from "@/components/NewsTicker";
 
 const rubik = Rubik({ subsets: ["latin"], variable: '--font-rubik' });
 const roboto = Roboto({ weight: ['400', '500', '700'], subsets: ["latin"], variable: '--font-roboto' });
@@ -12,6 +13,10 @@ export const metadata: Metadata = {
   title: "Digital Insights UAE - Advanced Cybersecurity Solutions",
   description: "Keep companies safe from cyber attacks. 24/7 threat detection, incident response, and cutting-edge security services for UAE businesses.",
   keywords: "Cybersecurity, Digital Forensics, SOC, Penetration Testing, Security Assessments, AI Security, UAE",
+  icons: {
+    icon: "/images/minilogo.png",
+    apple: "/images/minilogo.png",
+  },
 };
 
 export default function RootLayout({
@@ -26,6 +31,7 @@ export default function RootLayout({
         <main className="min-h-screen">
           {children}
         </main>
+        <NewsTicker />
         <Footer />
       </body>
     </html>
