@@ -6,6 +6,7 @@ import ThreeGlobe from "three-globe";
 import { useThree, Object3DNode, Canvas, extend } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { cn } from "@/lib/utils";
+import * as topojson from "topojson-client";
 
 declare module "@react-three/fiber" {
   interface ThreeElements {
@@ -151,17 +152,40 @@ function Globe({ globeConfig, data }: WorldProps) {
 
   useEffect(() => {
     if (globeRef.current && globeData) {
-      globeRef.current
-        .hexPolygonsData(countries.features)
-        .hexPolygonResolution(3)
-        .hexPolygonMargin(0.7)
-        .showAtmosphere(defaultProps.showAtmosphere)
-        .atmosphereColor(defaultProps.atmosphereColor)
-        .atmosphereAltitude(defaultProps.atmosphereAltitude)
-        .hexPolygonColor(() => {
-          return defaultProps.polygonColor;
+      // Fetch world TopoJSON data and convert to GeoJSON
+      fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+        .then(res => res.json())
+        .then(worldData => {
+          // Properly convert TopoJSON to GeoJSON using topojson-client
+          const countries = topojson.feature(
+            worldData,
+            worldData.objects.countries
+          ) as any;
+
+          globeRef.current!
+            .hexPolygonsData(countries.features)
+            .hexPolygonResolution(3)
+            .hexPolygonMargin(0.3)
+            .hexPolygonUseDots(false)
+            .hexPolygonAltitude(0.01)
+            .showAtmosphere(defaultProps.showAtmosphere)
+            .atmosphereColor(defaultProps.atmosphereColor)
+            .atmosphereAltitude(defaultProps.atmosphereAltitude)
+            .hexPolygonColor(() => {
+              return defaultProps.polygonColor;
+            });
+          startAnimation();
+        })
+        .catch(err => {
+          console.error('Error loading world data:', err);
+          // Fallback: just show atmosphere without continents
+          globeRef.current!
+            .hexPolygonsData([])
+            .showAtmosphere(defaultProps.showAtmosphere)
+            .atmosphereColor(defaultProps.atmosphereColor)
+            .atmosphereAltitude(defaultProps.atmosphereAltitude);
+          startAnimation();
         });
-      startAnimation();
     }
   }, [globeData]);
 
@@ -248,19 +272,21 @@ export function World(props: WorldProps) {
   return (
     <Canvas scene={scene} camera={new PerspectiveCamera(50, aspect, 180, 1800)}>
       <WebGLRendererConfig />
-      <ambientLight color={globeConfig.ambientLight} intensity={0.6} />
+      <ambientLight color={globeConfig.ambientLight} intensity={1.2} />
       <directionalLight
         color={globeConfig.directionalLeftLight}
         position={new Vector3(-400, 100, 400)}
+        intensity={1.5}
       />
       <directionalLight
         color={globeConfig.directionalTopLight}
         position={new Vector3(-200, 500, 200)}
+        intensity={1.5}
       />
       <pointLight
         color={globeConfig.pointLight}
         position={new Vector3(-200, 500, 200)}
-        intensity={0.8}
+        intensity={1.2}
       />
       <Globe {...props} />
       <OrbitControls
