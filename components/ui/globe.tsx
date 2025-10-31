@@ -235,7 +235,7 @@ function Globe({ globeConfig, data }: WorldProps) {
     return () => clearInterval(interval);
   }, [globeRef.current, globeData]);
 
-  return <threeGlobe ref={globeRef} />;
+return <primitive ref={globeRef} object={new ThreeGlobe()} />;
 }
 
 export function WebGLRendererConfig() {
