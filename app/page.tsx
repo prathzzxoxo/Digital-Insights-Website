@@ -6,7 +6,7 @@ import { ArrowRight, Play, Shield, Phone } from "lucide-react";
 import Link from "next/link";
 import VideoModal from "@/components/VideoModal";
 import dynamic from "next/dynamic";
-import NewsTicker from "@/components/NewsTicker";
+//import NewsTicker from "@/components/NewsTicker";
 import LoadingScreen from "@/components/LoadingScreen";
 import ParallaxStars from "@/components/ParallaxStars";
 
@@ -91,7 +91,7 @@ export default function Home() {
   return (
     <>
       <LoadingScreen />
-      <NewsTicker />
+      
       {/* Hero Section with Parallax Stars Background */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
         {/* Parallax Stars Background */}
