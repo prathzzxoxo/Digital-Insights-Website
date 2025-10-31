@@ -50,6 +50,15 @@ interface WorldProps {
   data: Position[];
 }
 
+function randomColor() {
+  const colors = ["#00ffff", "#00ff00", "#ffff00"]; // blue, green, yellow
+  return colors[Math.floor(Math.random() * colors.length)];
+}
+
+function randomDelay() {
+  return 500 + Math.random() * 3000;
+}
+
 let numbersOfRings: number[] = [0];
 
 function Globe({ globeConfig, data }: WorldProps) {
@@ -58,62 +67,23 @@ function Globe({ globeConfig, data }: WorldProps) {
 
   const defaultProps = {
     pointSize: 1,
-    atmosphereColor: "#ff4b4b", // 🔴 red tone for cybersecurity
+    atmosphereColor: "#ffffff",
     showAtmosphere: true,
-    atmosphereAltitude: 0.15,
-    polygonColor: "rgba(255,255,255,0.1)",
-    globeColor: "#0a0a0a",
-    emissive: "#ff0000",
-    emissiveIntensity: 0.4,
-    shininess: 0.8,
-    arcTime: 2000,
-    arcLength: 0.9,
+    atmosphereAltitude: 0.12,
+    polygonColor: "rgba(255,255,255,0.15)",
+    globeColor: "#1e78d8", // 🌍 based on your uploaded image (soft light-blue)
+    emissive: "#001133",
+    emissiveIntensity: 0.3,
+    shininess: 0.9,
+    arcTime: 3000,
+    arcLength: 0.7,
     rings: 1,
     maxRings: 3,
     ...globeConfig,
   };
 
-  // 🌍 Build material + base color
-  const buildMaterial = () => {
-    if (!globeRef.current) return;
-    const globeMaterial = globeRef.current.globeMaterial() as any;
-    globeMaterial.color = new Color(defaultProps.globeColor);
-    globeMaterial.emissive = new Color(defaultProps.emissive);
-    globeMaterial.emissiveIntensity = defaultProps.emissiveIntensity;
-    globeMaterial.shininess = defaultProps.shininess;
-  };
-
-  // 🧩 Convert incoming arc data into points
+  // 🧩 Build valid arc data
   const buildData = () => {
-    const points = data.flatMap((arc) => {
-      if (
-        [arc.startLat, arc.startLng, arc.endLat, arc.endLng].some(
-          (v) => typeof v !== "number" || isNaN(v)
-        )
-      ) {
-        console.warn("Skipping invalid arc:", arc);
-        return [];
-      }
-      const rgb = hexToRgb(arc.color);
-      if (!rgb) return [];
-      const colorFn = (t: number) =>
-        `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${1 - t})`;
-      return [
-        { size: defaultProps.pointSize, order: arc.order, color: colorFn, lat: arc.startLat, lng: arc.startLng },
-        { size: defaultProps.pointSize, order: arc.order, color: colorFn, lat: arc.endLat, lng: arc.endLng },
-      ];
-    });
-
-    const uniquePoints = points.filter(
-      (v, i, a) => a.findIndex((v2) => v2.lat === v.lat && v2.lng === v.lng) === i
-    );
-    setGlobeData(uniquePoints);
-  };
-
-  // 🌐 Build arcs and animations
-  const startAnimation = () => {
-    if (!globeRef.current) return;
-
     const validData = data.filter(
       (d) =>
         typeof d.startLat === "number" &&
@@ -122,58 +92,60 @@ function Globe({ globeConfig, data }: WorldProps) {
         typeof d.endLng === "number"
     );
 
-    // ✈️ Animated arcs
+    setGlobeData(validData);
+  };
+
+  // 🪄 Randomly trigger arcs (GitHub-style smooth randomness)
+  const startAnimation = () => {
+    if (!globeRef.current) return;
+
     (globeRef.current as any)
-      .arcsData(validData)
+      .arcsData(globeData)
       .arcStartLat((d: Position) => d.startLat)
       .arcStartLng((d: Position) => d.startLng)
       .arcEndLat((d: Position) => d.endLat)
       .arcEndLng((d: Position) => d.endLng)
-      .arcColor(() => ["#ff0000", "#ffffff"]) // red-white trail
-      .arcAltitude((d: Position) => d.arcAlt || 0.1)
+      .arcColor(() => randomColor())
+      .arcAltitude(() => Math.random() * 0.25 + 0.05)
+      .arcStroke(() => 0.2 + Math.random() * 0.1)
       .arcDashLength(defaultProps.arcLength)
-      .arcDashGap(4)
-      .arcDashAnimateTime(() => defaultProps.arcTime);
+      .arcDashGap(2)
+      .arcDashAnimateTime(() => defaultProps.arcTime + Math.random() * 1500);
 
-    // ✴️ Points
+    // 🌐 Points
     (globeRef.current as any)
-      .pointsData(validData)
-      .pointColor(() => "#ff4b4b")
+      .pointsData(globeData)
+      .pointColor(() => "#fff")
       .pointsMerge(true)
       .pointAltitude(0)
       .pointRadius(defaultProps.pointSize);
 
-    // 🔄 Rings
-    const activeRings = globeData.filter((_, i) => numbersOfRings.includes(i));
+    // ✴️ Optional rings for pulse effect
     (globeRef.current as any)
-      .ringsData(activeRings)
-      .ringColor((t: number) => `rgba(255, 0, 0, ${1 - t})`)
+      .ringsData([])
+      .ringColor(() => "rgba(0,255,255,0.3)")
       .ringMaxRadius(defaultProps.maxRings)
-      .ringPropagationSpeed(RING_PROPAGATION_SPEED)
-      .ringRepeatPeriod(
-        (defaultProps.arcTime * defaultProps.arcLength) / defaultProps.rings
-      );
+      .ringPropagationSpeed(RING_PROPAGATION_SPEED);
   };
 
-  // 🌍 Load world data
+  // 🌍 Fetch and render globe polygons
   useEffect(() => {
-    if (!globeRef.current || !data.length) return;
+    if (!globeRef.current) return;
+
     buildData();
-    buildMaterial();
 
     fetch("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json")
       .then((res) => res.json())
       .then((worldData) => {
         const countries = topojson.feature(worldData, worldData.objects.countries) as any;
         const validFeatures = countries.features.filter(
-          (f: any) =>
-            f?.geometry?.coordinates && Array.isArray(f.geometry.coordinates)
+          (f: any) => f?.geometry?.coordinates && Array.isArray(f.geometry.coordinates)
         );
 
         (globeRef.current as any)
           .polygonsData(validFeatures)
           .polygonCapColor(() => defaultProps.polygonColor)
-          .polygonSideColor(() => "rgba(255,0,0,0.1)")
+          .polygonSideColor(() => "rgba(0,0,0,0.15)")
           .polygonStrokeColor(() => "rgba(255,255,255,0.05)")
           .polygonAltitude(0.01)
           .showAtmosphere(defaultProps.showAtmosphere)
@@ -181,24 +153,19 @@ function Globe({ globeConfig, data }: WorldProps) {
           .atmosphereAltitude(defaultProps.atmosphereAltitude);
 
         startAnimation();
-      })
-      .catch((err) => {
-        console.error("Error loading world data:", err);
-        startAnimation();
+
+        // ⏱️ Random update loop to mimic GitHub-style flow
+        const interval = setInterval(() => {
+          if (!globeRef.current) return;
+          (globeRef.current as any)
+            .arcsData(globeData.sort(() => Math.random() - 0.5))
+            .arcColor(() => randomColor())
+            .arcDashAnimateTime(() => defaultProps.arcTime + randomDelay());
+        }, 4000);
+
+        return () => clearInterval(interval);
       });
   }, [data]);
-
-  // 🔁 Rings pulse loop
-  useEffect(() => {
-    if (!globeRef.current || !globeData.length) return;
-    const interval = setInterval(() => {
-      numbersOfRings = genRandomNumbers(0, data.length, Math.floor((data.length * 4) / 5));
-      (globeRef.current as any).ringsData(
-        globeData.filter((_, i) => numbersOfRings.includes(i))
-      );
-    }, 2000);
-    return () => clearInterval(interval);
-  }, [globeRef.current, globeData]);
 
   return <primitive ref={globeRef} object={new ThreeGlobe()} />;
 }
@@ -222,10 +189,9 @@ export function World(props: WorldProps) {
   return (
     <Canvas scene={scene} camera={new PerspectiveCamera(50, aspect, 180, 1800)}>
       <WebGLRendererConfig />
-      <ambientLight color={globeConfig.ambientLight || "#ffffff"} intensity={1.5} />
-      <directionalLight color={"#ff4b4b"} position={new Vector3(-400, 100, 400)} intensity={2} />
-      <directionalLight color={"#ffffff"} position={new Vector3(-200, 500, 200)} intensity={1.8} />
-      <pointLight color={"#ff0000"} position={new Vector3(-200, 500, 200)} intensity={1.2} />
+      <ambientLight intensity={1.3} />
+      <directionalLight color={"#ffffff"} position={new Vector3(-400, 200, 300)} intensity={1.8} />
+      <pointLight color={"#00aaff"} position={new Vector3(200, 400, 200)} intensity={1.2} />
       <Globe {...props} />
       <OrbitControls
         enablePan={false}
@@ -239,27 +205,4 @@ export function World(props: WorldProps) {
       />
     </Canvas>
   );
-}
-
-// 🎨 Helpers
-export function hexToRgb(hex: string) {
-  const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  hex = hex.replace(shorthandRegex, (m, r, g, b) => r + r + g + g + b + b);
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result
-    ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
-      }
-    : null;
-}
-
-export function genRandomNumbers(min: number, max: number, count: number) {
-  const arr: number[] = [];
-  while (arr.length < count) {
-    const r = Math.floor(Math.random() * (max - min)) + min;
-    if (!arr.includes(r)) arr.push(r);
-  }
-  return arr;
 }
