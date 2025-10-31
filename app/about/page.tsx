@@ -122,8 +122,8 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
             <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
@@ -141,8 +141,8 @@ export default function AboutPage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="text-center"
           >
             <h2 className="text-4xl sm:text-5xl font-bold text-white mb-8">
@@ -162,8 +162,8 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
             className="text-center mb-16"
           >
             <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
@@ -179,9 +179,8 @@ export default function AboutPage() {
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                 whileHover={{ y: -10, scale: 1.02 }}
                 className="bg-gradient-to-br from-slate-950 to-black border border-red-900/30 rounded-2xl p-8 hover:border-red-500/50 transition-all group"
               >
@@ -215,8 +214,8 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
             className="text-center mb-16"
           >
             <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
@@ -232,9 +231,8 @@ export default function AboutPage() {
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.9 + index * 0.15 }}
                 whileHover={{ y: -10 }}
                 className="bg-black/60 backdrop-blur-sm border border-red-900/30 rounded-2xl p-8 hover:border-red-500/50 hover:bg-black/70 transition-all"
               >
@@ -254,8 +252,8 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.3 }}
             className="text-center mb-16"
           >
             <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
@@ -271,9 +269,8 @@ export default function AboutPage() {
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 1.4 + index * 0.1 }}
                 whileHover={{ scale: 1.05, y: -5 }}
                 className="bg-white/5 backdrop-blur-sm border border-red-900/30 rounded-2xl p-6 flex items-center justify-center hover:border-red-500/50 hover:bg-white/10 transition-all group"
               >
@@ -297,8 +294,8 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.9 }}
           >
             <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
               Certifications & <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-700">Expertise</span>
@@ -312,9 +309,8 @@ export default function AboutPage() {
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 2.0 + index * 0.1 }}
                   whileHover={{ scale: 1.1, y: -5 }}
                   className="bg-black border border-red-900/30 rounded-xl p-6 hover:border-red-500/50 transition-all"
                 >
@@ -332,8 +328,8 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 2.6 }}
           >
             <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
               Ready to Secure Your Organization?

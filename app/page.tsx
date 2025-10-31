@@ -8,6 +8,7 @@ import VideoModal from "@/components/VideoModal";
 import { Vortex } from "@/components/ui/vortex";
 import dynamic from "next/dynamic";
 import NewsTicker from "@/components/NewsTicker";
+import LoadingScreen from "@/components/LoadingScreen";
 
 const World = dynamic(() => import("@/components/ui/globe").then((m) => m.World), {
   ssr: false,
@@ -89,6 +90,7 @@ export default function Home() {
 
   return (
     <>
+      <LoadingScreen />
       <NewsTicker />
       {/* Hero Section with Vortex Background */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">

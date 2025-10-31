@@ -162,17 +162,42 @@ function Globe({ globeConfig, data }: WorldProps) {
             worldData.objects.countries
           ) as any;
 
+          // Filter out invalid features with proper validation
+          const validFeatures = countries.features.filter((feature: any) => {
+            if (!feature || !feature.geometry || !feature.geometry.coordinates) {
+              return false;
+            }
+
+            // Check if coordinates are valid numbers
+            const coords = feature.geometry.coordinates;
+            const hasValidCoords = (arr: any): boolean => {
+              if (Array.isArray(arr)) {
+                if (Array.isArray(arr[0])) {
+                  return arr.every(hasValidCoords);
+                }
+                return arr.every((n: any) => typeof n === 'number' && !isNaN(n) && isFinite(n));
+              }
+              return false;
+            };
+
+            return hasValidCoords(coords);
+          });
+
           try {
-            // Use regular polygons for accurate continent shapes
-            globeRef.current!
-              .polygonsData(countries.features)
-              .polygonCapColor(() => defaultProps.polygonColor)
-              .polygonSideColor(() => 'rgba(0, 0, 0, 0.1)')
-              .polygonStrokeColor(() => 'rgba(255, 255, 255, 0.1)')
-              .polygonAltitude(0.01)
-              .showAtmosphere(defaultProps.showAtmosphere)
-              .atmosphereColor(defaultProps.atmosphereColor)
-              .atmosphereAltitude(defaultProps.atmosphereAltitude);
+            if (validFeatures.length > 0) {
+              // Use regular polygons for accurate continent shapes
+              globeRef.current!
+                .polygonsData(validFeatures)
+                .polygonCapColor(() => defaultProps.polygonColor)
+                .polygonSideColor(() => 'rgba(0, 0, 0, 0.1)')
+                .polygonStrokeColor(() => 'rgba(255, 255, 255, 0.1)')
+                .polygonAltitude(0.01)
+                .showAtmosphere(defaultProps.showAtmosphere)
+                .atmosphereColor(defaultProps.atmosphereColor)
+                .atmosphereAltitude(defaultProps.atmosphereAltitude);
+            } else {
+              throw new Error('No valid features found');
+            }
           } catch (err) {
             console.warn('Error setting polygons:', err);
             // Fallback to showing just the globe without polygons
@@ -187,11 +212,13 @@ function Globe({ globeConfig, data }: WorldProps) {
         .catch(err => {
           console.error('Error loading world data:', err);
           // Fallback: just show atmosphere without continents
-          globeRef.current!
-            .polygonsData([])
-            .showAtmosphere(defaultProps.showAtmosphere)
-            .atmosphereColor(defaultProps.atmosphereColor)
-            .atmosphereAltitude(defaultProps.atmosphereAltitude);
+          if (globeRef.current) {
+            globeRef.current
+              .polygonsData([])
+              .showAtmosphere(defaultProps.showAtmosphere)
+              .atmosphereColor(defaultProps.atmosphereColor)
+              .atmosphereAltitude(defaultProps.atmosphereAltitude);
+          }
           startAnimation();
         });
     }

@@ -157,9 +157,8 @@ export default function ServicesPage() {
                 key={service.id}
                 id={service.id}
                 initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
                 className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}
               >
                 {/* Image */}
@@ -181,9 +180,8 @@ export default function ServicesPage() {
                 <div className={index % 2 === 1 ? 'lg:order-1' : ''}>
                   <motion.div
                     initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.2 + 0.2 }}
                   >
                     <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
                       {service.title}
@@ -201,9 +199,8 @@ export default function ServicesPage() {
                         <motion.li
                           key={idx}
                           initial={{ opacity: 0, x: -20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 0.3 + idx * 0.1 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.4, delay: index * 0.2 + 0.4 + idx * 0.1 }}
                           className="flex items-center text-gray-300"
                         >
                           <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${service.color} mr-3`} />
@@ -234,8 +231,8 @@ export default function ServicesPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 2.0 }}
           >
             <h2 className="text-4xl font-bold text-white mb-6">
               Ready to Secure Your Organization?
