@@ -6,7 +6,6 @@ import { ArrowRight, Play, Shield, Phone } from "lucide-react";
 import Link from "next/link";
 import VideoModal from "@/components/VideoModal";
 import dynamic from "next/dynamic";
-//import NewsTicker from "@/components/NewsTicker";
 import LoadingScreen from "@/components/LoadingScreen";
 import ParallaxStars from "@/components/ParallaxStars";
 
