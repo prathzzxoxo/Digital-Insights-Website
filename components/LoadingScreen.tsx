@@ -6,12 +6,22 @@ export default function LoadingScreen() {
   const [showLoading, setShowLoading] = useState(false);
 
   useEffect(() => {
+    if (typeof window === "undefined") return; // Safety for SSR
+
+    // Get navigation entries safely and handle TypeScript
+    const navigationEntries = performance.getEntriesByType?.("navigation") as
+      | PerformanceNavigationTiming[]
+      | undefined;
+    const navEntry = navigationEntries?.[0];
+    const navType = (navEntry as any)?.type;
+
     // Check if this is a page reload or first visit
-    const isReload = performance.navigation?.type === 1 ||
-                     performance.getEntriesByType?.('navigation')?.[0]?.type === 'reload';
+    const isReload =
+      (performance as any).navigation?.type === 1 ||
+      navType === "reload";
 
     // Check if user has visited the home page in this session
-    const hasVisitedInSession = sessionStorage.getItem('hasVisitedHome');
+    const hasVisitedInSession = sessionStorage.getItem("hasVisitedHome");
 
     // Show loading only if:
     // 1. First time visiting in this session (not set in sessionStorage)
@@ -21,7 +31,7 @@ export default function LoadingScreen() {
 
       // Mark as visited for this session (only if not a reload)
       if (!isReload) {
-        sessionStorage.setItem('hasVisitedHome', 'true');
+        sessionStorage.setItem("hasVisitedHome", "true");
       }
 
       // Show loading screen for 3 seconds
@@ -38,7 +48,7 @@ export default function LoadingScreen() {
   return (
     <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black">
       {/* Logo or Brand */}
-      <div className="mb-8">
+      <div className="mb-8 text-center">
         <div className="text-4xl font-bold text-white mb-2">
           Digital <span className="text-red-600">Insights</span>
         </div>
@@ -54,6 +64,7 @@ export default function LoadingScreen() {
           position: relative;
           width: 80px;
           height: 80px;
+          animation: fadeIn 0.3s ease-in;
         }
 
         .loader {
@@ -103,11 +114,6 @@ export default function LoadingScreen() {
           100% {
             transform: rotate(360deg);
           }
-        }
-
-        /* Fade out animation */
-        .loader-container {
-          animation: fadeIn 0.3s ease-in;
         }
 
         @keyframes fadeIn {
