@@ -13,8 +13,19 @@ export const metadata: Metadata = {
   description: "Keep companies safe from cyber attacks. 24/7 threat detection, incident response, and cutting-edge security services for UAE businesses.",
   keywords: "Cybersecurity, Digital Forensics, SOC, Penetration Testing, Security Assessments, AI Security, UAE",
   icons: {
-    icon: "/images/transperentlogo.png",
-    apple: "/images/transperentlogo.png",
+    icon: [
+      {
+        url: "/images/transperentlogo.png",
+        type: "image/png",
+      }
+    ],
+    apple: [
+      {
+        url: "/images/transperentlogo.png",
+        type: "image/png",
+      }
+    ],
+    shortcut: "/images/transperentlogo.png",
   },
 };
 

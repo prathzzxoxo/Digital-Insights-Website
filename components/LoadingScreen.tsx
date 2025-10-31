@@ -3,50 +3,35 @@
 import { useEffect, useState } from "react";
 
 export default function LoadingScreen() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [showLoading, setShowLoading] = useState(true);
+  const [showLoading, setShowLoading] = useState(false);
 
   useEffect(() => {
-    // Check if user has visited before (in this session)
-    const hasVisited = sessionStorage.getItem('hasVisitedHome');
+    // Check if this is a page reload or first visit
+    const isReload = performance.navigation?.type === 1 ||
+                     performance.getEntriesByType?.('navigation')?.[0]?.type === 'reload';
 
-    if (hasVisited) {
-      // If already visited in this session, don't show initial loading
-      setIsLoading(false);
-      setShowLoading(false);
-      return;
-    }
+    // Check if user has visited the home page in this session
+    const hasVisitedInSession = sessionStorage.getItem('hasVisitedHome');
 
-    // Mark as visited for this session
-    sessionStorage.setItem('hasVisitedHome', 'true');
+    // Show loading only if:
+    // 1. First time visiting in this session (not set in sessionStorage)
+    // 2. OR it's a manual reload
+    if (!hasVisitedInSession || isReload) {
+      setShowLoading(true);
 
-    // Show loading screen for 3 seconds on first visit
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-      setShowLoading(false);
-    }, 3000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Also show loading when page is still loading (slow network)
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const handleLoad = () => {
-        // Page fully loaded, can hide loading if timer is done
-        if (!isLoading) {
-          setShowLoading(false);
-        }
-      };
-
-      if (document.readyState === 'complete') {
-        handleLoad();
-      } else {
-        window.addEventListener('load', handleLoad);
-        return () => window.removeEventListener('load', handleLoad);
+      // Mark as visited for this session (only if not a reload)
+      if (!isReload) {
+        sessionStorage.setItem('hasVisitedHome', 'true');
       }
+
+      // Show loading screen for 3 seconds
+      const timer = setTimeout(() => {
+        setShowLoading(false);
+      }, 3000);
+
+      return () => clearTimeout(timer);
     }
-  }, [isLoading]);
+  }, []);
 
   if (!showLoading) return null;
 

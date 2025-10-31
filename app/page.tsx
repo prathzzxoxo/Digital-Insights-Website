@@ -5,10 +5,10 @@ import { motion } from "framer-motion";
 import { ArrowRight, Play, Shield, Phone } from "lucide-react";
 import Link from "next/link";
 import VideoModal from "@/components/VideoModal";
-import { Vortex } from "@/components/ui/vortex";
 import dynamic from "next/dynamic";
 import NewsTicker from "@/components/NewsTicker";
 import LoadingScreen from "@/components/LoadingScreen";
+import ParallaxStars from "@/components/ParallaxStars";
 
 const World = dynamic(() => import("@/components/ui/globe").then((m) => m.World), {
   ssr: false,
@@ -92,18 +92,11 @@ export default function Home() {
     <>
       <LoadingScreen />
       <NewsTicker />
-      {/* Hero Section with Vortex Background */}
+      {/* Hero Section with Parallax Stars Background */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
-        {/* Vortex Background */}
+        {/* Parallax Stars Background */}
         <div className="absolute inset-0 z-0">
-          <Vortex
-            backgroundColor="#000000"
-            rangeY={800}
-            particleCount={500}
-            baseHue={200}
-            rangeSpeed={2}
-            className="w-full h-full"
-          />
+          <ParallaxStars />
         </div>
 
         <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
