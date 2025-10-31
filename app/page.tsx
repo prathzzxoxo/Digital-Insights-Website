@@ -8,13 +8,25 @@ import VideoModal from "@/components/VideoModal";
 import dynamic from "next/dynamic";
 import LoadingScreen from "@/components/LoadingScreen";
 import ParallaxStars from "@/components/ParallaxStars";
-
+import { useEffect } from "react"
 const World = dynamic(() => import("@/components/ui/globe").then((m) => m.World), {
   ssr: false,
 });
 
 export default function Home() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+
+    useEffect(() => {
+      if (typeof window !== "undefined") {
+        // scroll to the hero section on load
+        const hero = document.getElementById("hero");
+        if (hero) {
+          hero.scrollIntoView({ behavior: "smooth" });
+        } else {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      }
+    }, []);
 
   const globeConfig = {
     pointSize: 1,
