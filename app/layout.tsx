@@ -9,12 +9,12 @@ const roboto = Roboto({ weight: ['400', '500', '700'], subsets: ["latin"], varia
 const robotoSlab = Roboto_Slab({ subsets: ["latin"], variable: '--font-roboto-slab' });
 
 export const metadata: Metadata = {
-  title: "Digital Insights UAE - Advanced Cybersecurity Solutions",
+  title: "Digital Insights",
   description: "Keep companies safe from cyber attacks. 24/7 threat detection, incident response, and cutting-edge security services for UAE businesses.",
   keywords: "Cybersecurity, Digital Forensics, SOC, Penetration Testing, Security Assessments, AI Security, UAE",
   icons: {
-    icon: "/images/minilogo.png",
-    apple: "/images/minilogo.png",
+    icon: "/images/transperentlogo.png",
+    apple: "/images/transperentlogo.png",
   },
 };
 

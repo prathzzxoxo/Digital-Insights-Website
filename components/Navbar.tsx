@@ -31,17 +31,7 @@ const Navbar = () => {
         { name: "Penetration Testing", href: "/services#pentest" },
         { name: "Security Assessments", href: "/services#assessments" },
         { name: "Platform Engineering", href: "/services#platform" },
-        { name: "AI/ML Enhanced Workflows", href: "/services#ai-ml" },
-      ],
-    },
-    {
-      name: "AI Solutions",
-      href: "/ai-solutions",
-      dropdown: [
-        { name: "Machine Learning", href: "/ai-solutions#ml" },
-        { name: "Threat Detection", href: "/ai-solutions#threat" },
-        { name: "Predictive Analytics", href: "/ai-solutions#analytics" },
-        { name: "AI Consulting", href: "/ai-solutions#consulting" },
+        { name: "AI Solutions", href: "/ai-solutions" },
       ],
     },
     { name: "Blog", href: "/blog" },
@@ -66,18 +56,16 @@ const Navbar = () => {
             whileHover={{ scale: 1.05 }}
             className="flex-shrink-0"
           >
-            <Link href="/" className="flex items-center space-x-3">
-              <div className="relative w-12 h-12">
+            <Link href="/" className="flex items-center gap-0">
+              <div className="relative w-48 h-12">
                 <Image
-                  src="/images/minilogo.png"
-                  alt="Digital Insights UAE"
+                  src="/images/newlogoblack.png"
+                  alt="Digital Insights"
                   fill
                   className="object-contain"
                 />
               </div>
-              <span className="text-white font-bold text-xl hidden sm:block">
-                Digital Insights
-              </span>
+              <span className="text-white text-xl font-bold -ml-2">Digital Insights</span>
             </Link>
           </motion.div>
 

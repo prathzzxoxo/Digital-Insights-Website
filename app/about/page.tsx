@@ -48,10 +48,10 @@ export default function AboutPage() {
 
   const partners = [
     { name: "Elastic", logo: "/partners/elastic.jpg" },
-    { name: "LevelBlue", logo: "/partners/levelblue_logo.jpg" },
+    { name: "LevelBlue", logo: "/partners/levelblue.png" },
     { name: "CrowdStrike", logo: "/partners/crowdstrike.png" },
     { name: "FireCompass", logo: "/partners/firecompass.png" },
-    { name: "Swimlane", logo: "/partners/swimlane.jpg" },
+    { name: "Swimlane", logo: "/partners/swimlane.png" },
   ];
 
   return (
@@ -197,8 +197,22 @@ export default function AboutPage() {
       </section>
 
       {/* Why Digital Insights? - 3 Columns */}
-      <section className="py-20 bg-black">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-black relative overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/background_1.jpg"
+            alt="Background"
+            fill
+            className="object-cover opacity-60"
+            quality={95}
+            priority
+          />
+          {/* Dark overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/60" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -208,7 +222,7 @@ export default function AboutPage() {
             <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
               Why <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-700">Digital Insights?</span>
             </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-200 max-w-3xl mx-auto">
               Comprehensive support across every stage of your cybersecurity journey
             </p>
           </motion.div>
@@ -222,13 +236,13 @@ export default function AboutPage() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.15 }}
                 whileHover={{ y: -10 }}
-                className="bg-black border border-red-900/30 rounded-2xl p-8 hover:border-red-500/50 transition-all"
+                className="bg-black/60 backdrop-blur-sm border border-red-900/30 rounded-2xl p-8 hover:border-red-500/50 hover:bg-black/70 transition-all"
               >
                 <div className="w-14 h-14 rounded-xl bg-gradient-to-r from-red-600 to-red-800 flex items-center justify-center mb-6">
                   <item.icon className="w-7 h-7 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-4">{item.title}</h3>
-                <p className="text-gray-300 leading-relaxed">{item.description}</p>
+                <p className="text-gray-200 leading-relaxed">{item.description}</p>
               </motion.div>
             ))}
           </div>

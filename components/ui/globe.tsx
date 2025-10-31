@@ -162,25 +162,33 @@ function Globe({ globeConfig, data }: WorldProps) {
             worldData.objects.countries
           ) as any;
 
-          globeRef.current!
-            .hexPolygonsData(countries.features)
-            .hexPolygonResolution(3)
-            .hexPolygonMargin(0.3)
-            .hexPolygonUseDots(false)
-            .hexPolygonAltitude(0.01)
-            .showAtmosphere(defaultProps.showAtmosphere)
-            .atmosphereColor(defaultProps.atmosphereColor)
-            .atmosphereAltitude(defaultProps.atmosphereAltitude)
-            .hexPolygonColor(() => {
-              return defaultProps.polygonColor;
-            });
+          try {
+            // Use regular polygons for accurate continent shapes
+            globeRef.current!
+              .polygonsData(countries.features)
+              .polygonCapColor(() => defaultProps.polygonColor)
+              .polygonSideColor(() => 'rgba(0, 0, 0, 0.1)')
+              .polygonStrokeColor(() => 'rgba(255, 255, 255, 0.1)')
+              .polygonAltitude(0.01)
+              .showAtmosphere(defaultProps.showAtmosphere)
+              .atmosphereColor(defaultProps.atmosphereColor)
+              .atmosphereAltitude(defaultProps.atmosphereAltitude);
+          } catch (err) {
+            console.warn('Error setting polygons:', err);
+            // Fallback to showing just the globe without polygons
+            globeRef.current!
+              .polygonsData([])
+              .showAtmosphere(defaultProps.showAtmosphere)
+              .atmosphereColor(defaultProps.atmosphereColor)
+              .atmosphereAltitude(defaultProps.atmosphereAltitude);
+          }
           startAnimation();
         })
         .catch(err => {
           console.error('Error loading world data:', err);
           // Fallback: just show atmosphere without continents
           globeRef.current!
-            .hexPolygonsData([])
+            .polygonsData([])
             .showAtmosphere(defaultProps.showAtmosphere)
             .atmosphereColor(defaultProps.atmosphereColor)
             .atmosphereAltitude(defaultProps.atmosphereAltitude);
@@ -192,26 +200,34 @@ function Globe({ globeConfig, data }: WorldProps) {
   const startAnimation = () => {
     if (!globeRef.current || !globeData) return;
 
+    // Filter out any data with NaN or invalid values
+    const validData = data.filter(d =>
+      !isNaN(d.startLat) && !isNaN(d.startLng) &&
+      !isNaN(d.endLat) && !isNaN(d.endLng) &&
+      d.startLat !== null && d.startLng !== null &&
+      d.endLat !== null && d.endLng !== null
+    );
+
     globeRef.current
-      .arcsData(data)
-      .arcStartLat((d) => (d as { startLat: number }).startLat * 1)
-      .arcStartLng((d) => (d as { startLng: number }).startLng * 1)
-      .arcEndLat((d) => (d as { endLat: number }).endLat * 1)
-      .arcEndLng((d) => (d as { endLng: number }).endLng * 1)
+      .arcsData(validData)
+      .arcStartLat((d) => (d as { startLat: number }).startLat || 0)
+      .arcStartLng((d) => (d as { startLng: number }).startLng || 0)
+      .arcEndLat((d) => (d as { endLat: number }).endLat || 0)
+      .arcEndLng((d) => (d as { endLng: number }).endLng || 0)
       .arcColor((e: any) => (e as { color: string }).color)
       .arcAltitude((e) => {
-        return (e as { arcAlt: number }).arcAlt * 1;
+        return (e as { arcAlt: number }).arcAlt || 0.1;
       })
       .arcStroke(() => {
         return [0.32, 0.28, 0.3][Math.round(Math.random() * 2)];
       })
       .arcDashLength(defaultProps.arcLength)
-      .arcDashInitialGap((e) => (e as { order: number }).order * 1)
+      .arcDashInitialGap((e) => (e as { order: number }).order || 0)
       .arcDashGap(15)
       .arcDashAnimateTime(() => defaultProps.arcTime);
 
     globeRef.current
-      .pointsData(data)
+      .pointsData(validData)
       .pointColor((e) => (e as { color: string }).color)
       .pointsMerge(true)
       .pointAltitude(0.0)

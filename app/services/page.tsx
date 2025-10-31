@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Shield, Search, Lock, FileSearch, Users, GraduationCap, Cloud, Bot } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function ServicesPage() {
   const services = [
@@ -20,7 +21,7 @@ export default function ServicesPage() {
         "Comprehensive forensic analysis",
         "Event reconstruction capabilities"
       ],
-      color: "from-blue-500 to-cyan-500"
+      color: "from-red-500 to-red-700"
     },
     {
       id: "soc",
@@ -36,7 +37,7 @@ export default function ServicesPage() {
         "Compliance reporting",
         "Integrated threat intelligence"
       ],
-      color: "from-purple-500 to-pink-500"
+      color: "from-red-600 to-red-800"
     },
     {
       id: "pentest",
@@ -52,7 +53,7 @@ export default function ServicesPage() {
         "Network security testing",
         "Detailed remediation reports"
       ],
-      color: "from-orange-500 to-red-500"
+      color: "from-red-500 to-red-700"
     },
     {
       id: "assessments",
@@ -68,7 +69,7 @@ export default function ServicesPage() {
         "Policy and procedure assessment",
         "Action plan development"
       ],
-      color: "from-green-500 to-emerald-500"
+      color: "from-red-600 to-red-800"
     },
     {
       id: "consultancy",
@@ -84,7 +85,7 @@ export default function ServicesPage() {
         "GDPR data protection advisory",
         "Tailored security roadmaps"
       ],
-      color: "from-indigo-500 to-purple-500"
+      color: "from-red-500 to-red-700"
     },
     {
       id: "training",
@@ -100,7 +101,7 @@ export default function ServicesPage() {
         "AWS & Cisco certification courses",
         "Customized security awareness programs"
       ],
-      color: "from-pink-500 to-rose-500"
+      color: "from-red-600 to-red-800"
     },
     {
       id: "platform",
@@ -116,23 +117,7 @@ export default function ServicesPage() {
         "Container security",
         "CI/CD pipeline implementation"
       ],
-      color: "from-cyan-500 to-blue-500"
-    },
-    {
-      id: "ai-ml",
-      icon: Bot,
-      title: "AI/ML Enhanced Workflows",
-      description: "Leverage artificial intelligence and machine learning to enhance security operations, automate threat detection, and improve incident response.",
-      fullDescription: "Transform your security operations with AI and ML technologies. Our solutions use advanced algorithms to detect threats faster, automate responses, and predict potential security incidents.",
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80",
-      features: [
-        "Automated threat detection using ML",
-        "Predictive security analytics",
-        "Intelligent incident response automation",
-        "Behavioral analysis and anomaly detection",
-        "AI-powered security orchestration"
-      ],
-      color: "from-violet-500 to-purple-500"
+      color: "from-red-500 to-red-700"
     },
   ];
 
@@ -140,9 +125,9 @@ export default function ServicesPage() {
     <div className="min-h-screen bg-black">
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" />
-        <div className="absolute inset-0 opacity-10" style={{
-          backgroundImage: 'linear-gradient(rgba(14, 165, 233, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(14, 165, 233, 0.1) 1px, transparent 1px)',
+        <div className="absolute inset-0 bg-gradient-to-br from-red-950/50 via-black to-black" />
+        <div className="absolute inset-0 opacity-20" style={{
+          backgroundImage: 'linear-gradient(rgba(220, 38, 38, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(220, 38, 38, 0.1) 1px, transparent 1px)',
           backgroundSize: '50px 50px'
         }} />
 
@@ -154,7 +139,7 @@ export default function ServicesPage() {
             className="text-center"
           >
             <h1 className="text-5xl sm:text-6xl font-bold text-white mb-6">
-              Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-accent-400">Cybersecurity Services</span>
+              Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-700">Cybersecurity Services</span>
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Comprehensive security solutions tailored to protect your organization from evolving cyber threats

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight, Play, Shield, Phone } from "lucide-react";
 import Link from "next/link";
 import VideoModal from "@/components/VideoModal";
 import { Vortex } from "@/components/ui/vortex";
@@ -112,15 +112,6 @@ export default function Home() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="inline-block px-4 py-2 bg-white/10 border border-white/30 rounded-full mb-6"
-              >
-                <span className="text-white font-semibold text-sm">🛡️ AI-Powered Cybersecurity</span>
-              </motion.div>
-
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -128,7 +119,7 @@ export default function Home() {
                 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
               >
                 Keep Companies <br />
-                Safe From Cyber Attacks
+                Safe From <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-700">Cyber Attacks</span>
               </motion.h1>
 
               <motion.p
@@ -141,22 +132,6 @@ export default function Home() {
                 incident response, and cutting-edge security services for UAE businesses.
               </motion.p>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className="flex flex-col sm:flex-row gap-4"
-              >
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => setIsVideoOpen(true)}
-                  className="px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white rounded-full font-semibold text-lg flex items-center justify-center gap-2 hover:bg-white/20 transition-all"
-                >
-                  <Play className="w-5 h-5" />
-                  <span>Watch Demo</span>
-                </motion.button>
-              </motion.div>
             </motion.div>
 
             {/* Right Content - Globe */}
@@ -199,7 +174,7 @@ export default function Home() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
-              Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-accent-400">Core Services</span>
+              Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-700">Core Services</span>
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
               Comprehensive cybersecurity solutions tailored for your business
@@ -290,6 +265,48 @@ export default function Home() {
               </motion.button>
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Emergency Notice */}
+      <section className="py-20 bg-black">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-gradient-to-br from-red-950/50 via-black to-black border-2 border-red-500 rounded-3xl p-12 text-center shadow-2xl shadow-red-500/20 relative overflow-hidden"
+          >
+            <div className="absolute inset-0 opacity-10" style={{
+              backgroundImage: 'linear-gradient(rgba(220, 38, 38, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(220, 38, 38, 0.2) 1px, transparent 1px)',
+              backgroundSize: '50px 50px'
+            }} />
+            <div className="relative z-10">
+              <Shield className="w-20 h-20 text-red-500 mx-auto mb-6" />
+              <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">Under Cyber Attack?</h2>
+              <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">Our 24/7 emergency response team is ready to help you contain and neutralize threats immediately</p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <motion.a
+                  href="tel:+447771102970"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-10 py-5 bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white rounded-full font-bold text-lg inline-flex items-center justify-center gap-3 transition-all shadow-lg hover:shadow-xl hover:shadow-red-500/50"
+                >
+                  <Phone className="w-6 h-6" />
+                  UK: +44 777 110 2970
+                </motion.a>
+                <motion.a
+                  href="tel:+97142415888"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-10 py-5 bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white rounded-full font-bold text-lg inline-flex items-center justify-center gap-3 transition-all shadow-lg hover:shadow-xl hover:shadow-red-500/50"
+                >
+                  <Phone className="w-6 h-6" />
+                  UAE: +971 4 2415888
+                </motion.a>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 

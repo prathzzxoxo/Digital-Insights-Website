@@ -60,15 +60,15 @@ export default function AISolutionsPage() {
     <div className="min-h-screen bg-black">
       {/* Hero */}
       <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" />
-        <div className="absolute inset-0 opacity-10" style={{
-          backgroundImage: 'linear-gradient(rgba(217, 70, 239, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(217, 70, 239, 0.1) 1px, transparent 1px)',
+        <div className="absolute inset-0 bg-gradient-to-br from-red-950/50 via-black to-black" />
+        <div className="absolute inset-0 opacity-20" style={{
+          backgroundImage: 'linear-gradient(rgba(220, 38, 38, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(220, 38, 38, 0.1) 1px, transparent 1px)',
           backgroundSize: '50px 50px'
         }} />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
             <h1 className="text-5xl sm:text-6xl font-bold text-white mb-6">
-              AI-Powered <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-accent-400">Security Solutions</span>
+              AI-Powered <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-700">Security Solutions</span>
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Harness the power of artificial intelligence to protect your organization from advanced cyber threats
@@ -91,7 +91,7 @@ export default function AISolutionsPage() {
                 whileHover={{ y: -10 }}
                 className="group relative h-96 rounded-2xl overflow-hidden cursor-pointer"
               >
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent z-10" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent z-10" />
                 <div
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
                   style={{ backgroundImage: `url('${service.image}')` }}
@@ -103,7 +103,7 @@ export default function AISolutionsPage() {
                   <div>
                     <h3 className="text-2xl font-bold text-white mb-2">{service.title}</h3>
                     <p className="text-gray-300 mb-4">{service.description}</p>
-                    <div className="flex items-center gap-2 text-primary-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex items-center gap-2 text-red-500 opacity-0 group-hover:opacity-100 transition-opacity">
                       <span>Learn More</span>
                       <span>→</span>
                     </div>
@@ -116,10 +116,14 @@ export default function AISolutionsPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-gradient-to-r from-primary-600 to-accent-600">
-        <div className="max-w-4xl mx-auto px-4 text-center">
+      <section className="py-20 bg-gradient-to-br from-red-950/30 via-black to-black relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10" style={{
+          backgroundImage: 'linear-gradient(rgba(220, 38, 38, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(220, 38, 38, 0.2) 1px, transparent 1px)',
+          backgroundSize: '50px 50px'
+        }} />
+        <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
           <h2 className="text-4xl font-bold text-white mb-6">Ready to Transform Your Security with AI?</h2>
-          <p className="text-xl text-white/90 mb-8">Contact us for a consultation</p>
+          <p className="text-xl text-gray-300 mb-8">Contact us for a consultation</p>
           <Link href="/contact">
             <motion.button
               whileHover={{ scale: 1.05 }}
