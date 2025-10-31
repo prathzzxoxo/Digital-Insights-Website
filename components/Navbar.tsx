@@ -56,17 +56,18 @@ const Navbar = () => {
             whileHover={{ scale: 1.05 }}
             className="flex-shrink-0"
           >
-            <Link href="/" className="flex items-center gap-0">
-              <div className="relative w-48 h-12">
-                <Image
-                  src="/images/newlogoblack.png"
-                  alt="Digital Insights"
-                  fill
-                  className="object-contain"
-                />
-              </div>
-              <span className="text-white text-xl font-bold -ml-2">Digital Insights</span>
-            </Link>
+<Link href="/" className="flex items-center gap-2">
+  <div className="relative w-10 h-10">
+    <Image
+      src="/images/newlogoblack.png"
+      alt="Digital Insights"
+      fill
+      className="object-contain"
+    />
+  </div>
+  <span className="text-white text-lg font-semibold tracking-tight">Digital Insights</span>
+</Link>
+
           </motion.div>
 
           {/* Desktop Navigation */}
