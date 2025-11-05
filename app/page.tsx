@@ -220,10 +220,10 @@ export default function Home() {
                 href: "/services#platform"
               },
               {
-                title: "AI/ML Enhanced Workflows",
+                title: "AI Solutions",
                 description: "Automated threat detection and smart response",
                 image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80",
-                href: "/services#ai-ml"
+                href: "/ai-solutions"
               },
             ].map((service, index) => (
               <Link key={index} href={service.href}>
@@ -292,15 +292,6 @@ export default function Home() {
               <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">Under Cyber Attack?</h2>
               <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">Our 24/7 emergency response team is ready to help you contain and neutralize threats immediately</p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <motion.a
-                  href="tel:+447771102970"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-10 py-5 bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white rounded-full font-bold text-lg inline-flex items-center justify-center gap-3 transition-all shadow-lg hover:shadow-xl hover:shadow-red-500/50"
-                >
-                  <Phone className="w-6 h-6" />
-                  UK: +44 777 110 2970
-                </motion.a>
                 <motion.a
                   href="tel:+97142415888"
                   whileHover={{ scale: 1.05 }}

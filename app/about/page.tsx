@@ -305,7 +305,7 @@ export default function AboutPage() {
             </p>
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-              {["AWS Certified", "ISO 27001", "Kubernetes", "Azure Security", "CCSK", "HashiCorp"].map((cert, index) => (
+              {["AWS Certified", "ISO 27001", "Kubernetes", "Azure Security", "CompTIA Security+", "CISSP"].map((cert, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, scale: 0.8 }}

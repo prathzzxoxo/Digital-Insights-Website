@@ -123,7 +123,7 @@ export default function ContactPage() {
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
-            {/* United Kingdom Office */}
+            {/* UAE Office - Head Office */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -135,73 +135,8 @@ export default function ContactPage() {
                   <MapPin className="w-8 h-8 text-white" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-white">United Kingdom</h2>
-                  <p className="text-red-500 font-semibold">Head Office</p>
-                </div>
-              </div>
-
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
-                    <MapPin className="w-5 h-5 text-red-500" />
-                    Address
-                  </h3>
-                  <p className="text-gray-300 pl-7">
-                    Acorn House, 381 Midsummer Boulevard<br />
-                    Milton Keynes MK9 3HP
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
-                    <Phone className="w-5 h-5 text-red-500" />
-                    Cyber Attack Helpline
-                  </h3>
-                  <a href="tel:+447771102970" className="text-red-500 text-xl font-bold pl-7 hover:text-red-400 transition-colors">
-                    +44 777 110 2970
-                  </a>
-                  <p className="text-gray-400 text-sm pl-7 mt-1">24/7 Emergency Response</p>
-                </div>
-
-                <div>
-                  <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
-                    <Phone className="w-5 h-5 text-red-500" />
-                    General Enquiries
-                  </h3>
-                  <a href="tel:+442031301723" className="text-red-500 text-lg pl-7 hover:text-red-400 transition-colors block">
-                    +44 203 130 1723
-                  </a>
-                </div>
-
-                <div>
-                  <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
-                    <Mail className="w-5 h-5 text-red-500" />
-                    Email
-                  </h3>
-                  <a href="mailto:contact@dic-uk.com" className="text-red-500 pl-7 hover:text-red-400 transition-colors block">
-                    contact@dic-uk.com
-                  </a>
-                  <a href="mailto:cmo@digitalinsights-uae.com" className="text-red-500 pl-7 hover:text-red-400 transition-colors block">
-                    cmo@digitalinsights-uae.com
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* UAE Office */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="bg-black border border-red-500/30 rounded-3xl p-10 hover:border-red-500 hover:shadow-xl hover:shadow-red-500/20 transition-all"
-            >
-              <div className="flex items-center gap-4 mb-8">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-red-600 to-red-800 flex items-center justify-center">
-                  <MapPin className="w-8 h-8 text-white" />
-                </div>
-                <div>
                   <h2 className="text-2xl font-bold text-white">United Arab Emirates</h2>
-                  <p className="text-red-500 font-semibold">Dubai Office</p>
+                  <p className="text-red-500 font-semibold">Head Office</p>
                 </div>
               </div>
 
@@ -248,6 +183,69 @@ export default function ContactPage() {
                   <a href="mailto:info@digitalinsights-uae.com" className="text-red-500 pl-7 hover:text-red-400 transition-colors block">
                     info@digitalinsights-uae.com
                   </a>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* UK Office */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="bg-black border border-red-500/30 rounded-3xl p-10 hover:border-red-500 hover:shadow-xl hover:shadow-red-500/20 transition-all"
+            >
+              <div className="flex items-center gap-4 mb-8">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-red-600 to-red-800 flex items-center justify-center">
+                  <MapPin className="w-8 h-8 text-white" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-white">United Kingdom</h2>
+                  <p className="text-red-500 font-semibold">UK Office</p>
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
+                    <MapPin className="w-5 h-5 text-red-500" />
+                    Address
+                  </h3>
+                  <p className="text-gray-300 pl-7">
+                    Acorn House, 381 Midsummer Boulevard<br />
+                    Milton Keynes MK9 3HP
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
+                    <Phone className="w-5 h-5 text-red-500" />
+                    Cyber Attack Helpline
+                  </h3>
+                  <a href="tel:+447771102970" className="text-red-500 text-xl font-bold pl-7 hover:text-red-400 transition-colors">
+                    +44 777 110 2970
+                  </a>
+                  <p className="text-gray-400 text-sm pl-7 mt-1">24/7 Emergency Response</p>
+                </div>
+
+                <div>
+                  <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
+                    <Phone className="w-5 h-5 text-red-500" />
+                    General Enquiries
+                  </h3>
+                  <a href="tel:+442031301723" className="text-red-500 text-lg pl-7 hover:text-red-400 transition-colors block">
+                    +44 203 130 1723
+                  </a>
+                </div>
+
+                <div>
+                  <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
+                    <Mail className="w-5 h-5 text-red-500" />
+                    Email
+                  </h3>
+                  <a href="mailto:info@digitalinsights-uae.com" className="text-red-500 pl-7 hover:text-red-400 transition-colors block">
+                    info@digitalinsights-uae.com
+                  </a>
+                  
                 </div>
               </div>
             </motion.div>

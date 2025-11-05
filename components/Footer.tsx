@@ -24,8 +24,8 @@ const Footer = () => {
               <span className="text-white font-bold text-xl">Digital Insights</span>
             </div>
             <p className="text-gray-400 mb-4 leading-relaxed">
-              Triage,<br />
-              Investigate,<br />
+              Triage<br />
+              Investigate<br />
               Report
             </p>
             <div className="flex space-x-4">
@@ -72,7 +72,7 @@ const Footer = () => {
 
         <div className="border-t border-gray-800 pt-8">
           <p className="text-center text-gray-400">
-            © {currentYear} Digital Insights UAE. All rights reserved.
+            © {currentYear} Digital Insights. All rights reserved.
           </p>
         </div>
       </div>
