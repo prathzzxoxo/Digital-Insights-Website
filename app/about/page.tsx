@@ -47,7 +47,7 @@ export default function AboutPage() {
   ];
 
   const partners = [
-    { name: "Elastic", logo: "/partners/elastic.jpg" },
+    { name: "Elastic", logo: "/partners/elastic.png" },
     { name: "LevelBlue", logo: "/partners/levelblue.png" },
     { name: "CrowdStrike", logo: "/partners/crowdstrike.png" },
     { name: "FireCompass", logo: "/partners/firecompass.png" },

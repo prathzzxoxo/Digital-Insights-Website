@@ -171,9 +171,6 @@ export default function ServicesPage() {
                     className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                     style={{ backgroundImage: `url('${service.image}')` }}
                   />
-                  <div className={`absolute top-6 left-6 w-16 h-16 rounded-xl bg-gradient-to-r ${service.color} flex items-center justify-center z-20`}>
-                    <service.icon className="w-8 h-8 text-white" />
-                  </div>
                 </motion.div>
 
                 {/* Content */}
