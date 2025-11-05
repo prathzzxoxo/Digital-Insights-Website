@@ -45,7 +45,7 @@ export default function ServicesPage() {
       title: "Penetration Testing",
       description: "Combining Penetration Testing with Vulnerability Assessment to identify and validate threats or weaknesses that could compromise IT security.",
       fullDescription: "Our ethical hackers simulate real-world attacks to identify vulnerabilities before malicious actors can exploit them.",
-      image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&q=80",
+      image: "/images/pentest-cyber.jpg",
       features: [
         "Comprehensive vulnerability scanning",
         "Manual penetration testing",

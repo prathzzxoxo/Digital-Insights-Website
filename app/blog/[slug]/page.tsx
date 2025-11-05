@@ -474,10 +474,68 @@ const BlogPost = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="prose prose-invert prose-lg max-w-none mb-12"
+          className="mb-12"
         >
-          <div className="bg-black border border-red-500/30 rounded-2xl p-8 text-gray-300 whitespace-pre-line prose-headings:text-white prose-h1:text-4xl prose-h1:font-bold prose-h1:mb-6 prose-h1:text-red-500 prose-h2:text-2xl prose-h2:font-bold prose-h2:mb-4 prose-h2:mt-8 prose-h2:text-red-400 prose-h3:text-xl prose-h3:font-semibold prose-h3:mb-3 prose-h3:mt-6 prose-h3:text-red-300 prose-strong:text-white prose-ul:list-disc prose-ul:ml-6 prose-li:mb-2">
-            {post.content}
+          <div className="bg-black border border-red-500/30 rounded-2xl p-8 text-gray-300 space-y-6">
+            {post.content.split('\n').map((line: string, index: number) => {
+              // Remove leading/trailing whitespace
+              const trimmedLine = line.trim();
+
+              // Skip empty lines
+              if (!trimmedLine) return null;
+
+              // H1 headers (# )
+              if (trimmedLine.startsWith('# ')) {
+                return <h1 key={index} className="text-4xl font-bold text-red-500 mb-6 mt-8">{trimmedLine.substring(2)}</h1>;
+              }
+
+              // H2 headers (## )
+              if (trimmedLine.startsWith('## ')) {
+                return <h2 key={index} className="text-3xl font-bold text-red-400 mb-4 mt-8">{trimmedLine.substring(3)}</h2>;
+              }
+
+              // H3 headers (### )
+              if (trimmedLine.startsWith('### ')) {
+                return <h3 key={index} className="text-2xl font-semibold text-red-300 mb-3 mt-6">{trimmedLine.substring(4)}</h3>;
+              }
+
+              // Bold text (**text**)
+              if (trimmedLine.startsWith('**') && trimmedLine.endsWith('**')) {
+                return <p key={index} className="text-white font-bold text-lg mb-4">{trimmedLine.slice(2, -2)}</p>;
+              }
+
+              // List items (- )
+              if (trimmedLine.startsWith('- ')) {
+                const content = trimmedLine.substring(2);
+                // Handle bold within list items
+                if (content.includes('**')) {
+                  const parts = content.split('**');
+                  return (
+                    <li key={index} className="ml-6 mb-2 text-gray-300 list-disc">
+                      {parts.map((part, i) => i % 2 === 1 ? <strong key={i} className="text-white font-semibold">{part}</strong> : part)}
+                    </li>
+                  );
+                }
+                return <li key={index} className="ml-6 mb-2 text-gray-300 list-disc">{content}</li>;
+              }
+
+              // Numbered lists (1. 2. etc)
+              if (/^\d+\.\s/.test(trimmedLine)) {
+                const content = trimmedLine.replace(/^\d+\.\s/, '');
+                if (content.includes('**')) {
+                  const parts = content.split('**');
+                  return (
+                    <li key={index} className="ml-6 mb-2 text-gray-300 list-decimal">
+                      {parts.map((part, i) => i % 2 === 1 ? <strong key={i} className="text-white font-semibold">{part}</strong> : part)}
+                    </li>
+                  );
+                }
+                return <li key={index} className="ml-6 mb-2 text-gray-300 list-decimal">{content}</li>;
+              }
+
+              // Regular paragraphs
+              return <p key={index} className="text-gray-300 leading-relaxed mb-4">{trimmedLine}</p>;
+            })}
           </div>
         </motion.div>
 
