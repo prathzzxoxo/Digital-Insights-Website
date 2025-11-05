@@ -1,9 +1,55 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, Clock, Shield } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Clock, Shield, CheckCircle, AlertCircle } from "lucide-react";
+import { useState } from "react";
 
 export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    subject: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
+
   return (
     <div className="min-h-screen bg-black">
       {/* Hero Section */}
@@ -50,12 +96,15 @@ export default function ContactPage() {
                 <p className="text-gray-400">Fill out the form below and we'll get back to you within 24 hours</p>
               </div>
 
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-white font-medium mb-2">Your Name *</label>
                     <input
                       type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
                       required
                       className="w-full px-4 py-3 bg-black border border-red-500/30 rounded-xl text-white placeholder-gray-500 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/50 transition-all"
                       placeholder="John Doe"
@@ -66,6 +115,9 @@ export default function ContactPage() {
                     <label className="block text-white font-medium mb-2">Your Email *</label>
                     <input
                       type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
                       required
                       className="w-full px-4 py-3 bg-black border border-red-500/30 rounded-xl text-white placeholder-gray-500 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/50 transition-all"
                       placeholder="john@company.com"
@@ -77,6 +129,9 @@ export default function ContactPage() {
                   <label className="block text-white font-medium mb-2">Phone Number</label>
                   <input
                     type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 bg-black border border-red-500/30 rounded-xl text-white placeholder-gray-500 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/50 transition-all"
                     placeholder="+971 XX XXX XXXX"
                   />
@@ -86,6 +141,9 @@ export default function ContactPage() {
                   <label className="block text-white font-medium mb-2">Subject *</label>
                   <input
                     type="text"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
                     required
                     className="w-full px-4 py-3 bg-black border border-red-500/30 rounded-xl text-white placeholder-gray-500 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/50 transition-all"
                     placeholder="How can we help?"
@@ -96,6 +154,9 @@ export default function ContactPage() {
                   <label className="block text-white font-medium mb-2">Message *</label>
                   <textarea
                     rows={6}
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
                     required
                     className="w-full px-4 py-3 bg-black border border-red-500/30 rounded-xl text-white placeholder-gray-500 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/50 transition-all resize-none"
                     placeholder="Tell us about your security needs..."
@@ -109,14 +170,48 @@ export default function ContactPage() {
                   </label>
                 </div>
 
+                {/* Success Message */}
+                {submitStatus === 'success' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex items-center gap-3 p-4 bg-green-950/50 border border-green-500/50 rounded-xl text-green-400"
+                  >
+                    <CheckCircle className="w-5 h-5 flex-shrink-0" />
+                    <span>Thank you! Your message has been sent successfully. We'll get back to you within 24 hours.</span>
+                  </motion.div>
+                )}
+
+                {/* Error Message */}
+                {submitStatus === 'error' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex items-center gap-3 p-4 bg-red-950/50 border border-red-500/50 rounded-xl text-red-400"
+                  >
+                    <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                    <span>Oops! Something went wrong. Please try again or contact us directly.</span>
+                  </motion.div>
+                )}
+
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   type="submit"
-                  className="w-full px-8 py-4 bg-gradient-to-r from-red-600 to-red-800 text-white rounded-xl font-semibold text-lg flex items-center justify-center gap-2 hover:shadow-xl hover:shadow-red-500/30 transition-all"
+                  disabled={isSubmitting}
+                  className="w-full px-8 py-4 bg-gradient-to-r from-red-600 to-red-800 text-white rounded-xl font-semibold text-lg flex items-center justify-center gap-2 hover:shadow-xl hover:shadow-red-500/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <Send className="w-5 h-5" />
-                  <span>Send Message</span>
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      <span>Sending...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5" />
+                      <span>Send Message</span>
+                    </>
+                  )}
                 </motion.button>
               </form>
             </div>

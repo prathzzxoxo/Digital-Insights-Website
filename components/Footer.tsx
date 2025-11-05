@@ -23,7 +23,7 @@ const Footer = () => {
               />
               <span className="text-white font-bold text-xl">Digital Insights</span>
             </div>
-            <p className="text-gray-400 mb-4 leading-relaxed">
+            <p className="text-red-500 mb-4 leading-relaxed font-semibold">
               Triage<br />
               Investigate<br />
               Report
@@ -44,6 +44,7 @@ const Footer = () => {
               <li><Link href="/services#pentest" className="text-gray-400 hover:text-primary-400 transition-colors">Penetration Testing</Link></li>
               <li><Link href="/services#assessments" className="text-gray-400 hover:text-primary-400 transition-colors">Security Assessments</Link></li>
               <li><Link href="/services#training" className="text-gray-400 hover:text-primary-400 transition-colors">Training</Link></li>
+              <li><Link href="/services#platform" className="text-gray-400 hover:text-primary-400 transition-colors">Platform Engineering</Link></li>
             </ul>
           </div>
 
