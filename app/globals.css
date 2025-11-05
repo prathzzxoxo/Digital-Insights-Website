@@ -24,6 +24,16 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Hide scrollbar for modal */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
 /* Custom scrollbar */

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Linkedin } from "lucide-react";
+import { LinkedinIcon  } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -29,8 +29,8 @@ const Footer = () => {
               Report
             </p>
             <div className="flex space-x-4">
-              <a href="https://www.linkedin.com/company/dicuk/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary-400 transition-colors">
-                <Linkedin className="w-5 h-5" />
+              <a href="https://www.linkedin.com/company/dicuae" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary-400 transition-colors">
+                <LinkedinIcon  className="w-5 h-5" />
               </a>
             </div>
           </div>

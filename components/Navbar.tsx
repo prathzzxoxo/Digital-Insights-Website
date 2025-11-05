@@ -81,7 +81,7 @@ const Navbar = () => {
                   <Link
                     href={item.href}
                     className={`px-3 py-2 text-sm font-medium flex items-center group transition-colors
-                      ${pathname === item.href ? "text-red-500" : "text-gray-300 hover:text-white"}`}
+                      ${pathname === item.href || (item.name === "Services" && pathname === "/ai-solutions") ? "text-red-500" : "text-gray-300 hover:text-white"}`}
                   >
                     {item.name}
                     {item.dropdown && (

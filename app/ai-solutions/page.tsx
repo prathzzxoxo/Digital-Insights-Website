@@ -215,7 +215,11 @@ export default function AISolutionsPage() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-black border-2 border-red-500 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative"
+              className="bg-black border-2 border-red-500 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative scrollbar-hide"
+              style={{
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+              }}
             >
               {aiServices
                 .filter((s) => s.id === selectedService)
@@ -286,24 +290,15 @@ export default function AISolutionsPage() {
                         </div>
                       </div>
 
-                      {/* CTA Buttons */}
-                      <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-red-500/30">
-                        <Link href="/contact" className="flex-1">
+                      {/* CTA Button */}
+                      <div className="pt-6 border-t border-red-500/30">
+                        <Link href="/contact">
                           <motion.button
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                             className="w-full px-8 py-4 bg-gradient-to-r from-red-600 to-red-800 text-white rounded-xl font-semibold text-lg shadow-xl hover:shadow-red-500/50 transition-all"
                           >
                             Get Started
-                          </motion.button>
-                        </Link>
-                        <Link href="/contact" className="flex-1">
-                          <motion.button
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                            className="w-full px-8 py-4 bg-black border-2 border-red-500 text-white rounded-xl font-semibold text-lg hover:bg-red-950/30 transition-all"
-                          >
-                            Contact Us
                           </motion.button>
                         </Link>
                       </div>
