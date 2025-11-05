@@ -40,8 +40,8 @@ export default function ContactPage() {
           {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="max-w-4xl mx-auto mb-20"
           >
             <div className="bg-black border border-red-500/30 rounded-3xl p-10">
