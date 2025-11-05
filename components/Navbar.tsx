@@ -5,11 +5,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const pathname = usePathname(); // <-- Get current path
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,22 +54,18 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="flex-shrink-0"
-          >
-<Link href="/" className="flex items-center gap-2">
-  <div className="relative w-10 h-10">
-    <Image
-      src="/images/newlogoblack.png"
-      alt="Digital Insights"
-      fill
-      className="object-contain"
-    />
-  </div>
-  <span className="text-white text-lg font-semibold tracking-tight">Digital Insights</span>
-</Link>
-
+          <motion.div whileHover={{ scale: 1.05 }} className="flex-shrink-0">
+            <Link href="/" className="flex items-center gap-2">
+              <div className="relative w-10 h-10">
+                <Image
+                  src="/images/transperentlogo.png"
+                  alt="Digital Insights"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <span className="text-white text-lg font-semibold tracking-tight">Digital Insights</span>
+            </Link>
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -82,7 +80,8 @@ const Navbar = () => {
                 >
                   <Link
                     href={item.href}
-                    className="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors flex items-center group"
+                    className={`px-3 py-2 text-sm font-medium flex items-center group transition-colors
+                      ${pathname === item.href ? "text-red-500" : "text-gray-300 hover:text-white"}`}
                   >
                     {item.name}
                     {item.dropdown && (
@@ -110,7 +109,8 @@ const Navbar = () => {
                           <Link
                             key={subItem.name}
                             href={subItem.href}
-                            className="block px-4 py-3 text-sm text-gray-300 hover:bg-gray-900 hover:text-white transition-colors"
+                            className={`block px-4 py-3 text-sm transition-colors
+                              ${pathname === subItem.href ? "text-red-500" : "text-gray-300 hover:bg-gray-900 hover:text-white"}`}
                           >
                             {subItem.name}
                           </Link>
@@ -151,7 +151,8 @@ const Navbar = () => {
                 <div key={item.name}>
                   <Link
                     href={item.href}
-                    className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                    className={`block px-3 py-2 rounded-md text-base font-medium transition-colors
+                      ${pathname === item.href ? "text-red-500" : "text-gray-300 hover:text-white"}`}
                     onClick={() => setIsOpen(false)}
                   >
                     {item.name}
@@ -162,7 +163,8 @@ const Navbar = () => {
                         <Link
                           key={subItem.name}
                           href={subItem.href}
-                          className="text-gray-400 hover:text-white block px-3 py-2 rounded-md text-sm"
+                          className={`block px-3 py-2 rounded-md text-sm transition-colors
+                            ${pathname === subItem.href ? "text-red-500" : "text-gray-400 hover:text-white"}`}
                           onClick={() => setIsOpen(false)}
                         >
                           {subItem.name}
