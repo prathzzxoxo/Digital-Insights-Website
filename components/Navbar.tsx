@@ -21,7 +21,7 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Home", href: "/" },
-    { name: "Why Digital Insights", href: "/why-us" },
+    { name: "Why Digital Insights", href: "/about" },
     {
       name: "Services",
       href: "/services",
