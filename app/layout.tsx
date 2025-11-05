@@ -10,7 +10,7 @@ const robotoSlab = Roboto_Slab({ subsets: ["latin"], variable: '--font-roboto-sl
 
 export const metadata: Metadata = {
   title: "Digital Insights",
-  description: "Keep companies safe from cyber attacks. 24/7 threat detection, incident response, and cutting-edge security services for UAE businesses.",
+  description: "Triage. Investigate. Report. 24/7 threat detection, incident response, and cutting-edge security services for UAE businesses.",
   keywords: "Cybersecurity, Digital Forensics, SOC, Penetration Testing, Security Assessments, AI Security, UAE",
   icons: {
     icon: [
