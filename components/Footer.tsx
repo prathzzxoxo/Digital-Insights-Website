@@ -23,7 +23,7 @@ const Footer = () => {
               />
               <span className="text-white font-bold text-xl">Digital Insights</span>
             </div>
-            <p className="text-red-500 mb-4 leading-relaxed font-semibold">
+            <p className="text-white mb-4 leading-relaxed font-bold">
               Triage<br />
               Investigate<br />
               Report

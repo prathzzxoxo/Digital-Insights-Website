@@ -184,10 +184,7 @@ export default function AISolutionsPage() {
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
                   style={{ backgroundImage: `url('${service.image}')` }}
                 />
-                <div className="absolute inset-0 z-20 p-8 flex flex-col justify-between">
-                  <div className={`w-16 h-16 rounded-xl bg-gradient-to-r ${service.color} flex items-center justify-center`}>
-                    <service.icon className="w-8 h-8 text-white" />
-                  </div>
+                <div className="absolute inset-0 z-20 p-8 flex flex-col justify-end">
                   <div>
                     <h3 className="text-2xl font-bold text-white mb-2">{service.title}</h3>
                     <p className="text-gray-300 mb-4">{service.description}</p>
@@ -225,7 +222,7 @@ export default function AISolutionsPage() {
                 .map((service) => (
                   <div key={service.id}>
                     {/* Modal Header */}
-                    <div className="sticky top-0 bg-gradient-to-r from-red-600 to-red-800 p-8 rounded-t-3xl">
+                    <div className="sticky top-0 bg-gradient-to-r from-red-800 to-red-950 p-8 rounded-t-3xl">
                       <button
                         onClick={() => setSelectedService(null)}
                         className="absolute top-6 right-6 w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors"
